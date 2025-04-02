@@ -1,5 +1,18 @@
 # LegalHackathon
 
+## Prerequisites
+
+Make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- [Angular CLI](https://angular.io/cli) (version 19+ recommended)
+
+Install Angular CLI globally if not already installed:
+
+```bash
+npm install -g @angular/cli
+```
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.
 
 ## Development server
@@ -57,3 +70,38 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Setup Instructions
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/legal-hackathon.git
+   cd legal-hackathon
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+## Feature Creation Guide
+
+To create a new feature, follow these steps:
+
+1. Generate a new module:
+   ```bash
+   ng generate module feature-name
+   ```
+2. Generate components and services as needed within the feature module.
+
+## Resource Links
+
+- [Angular Documentation](https://angular.dev/overview)
+- [Angular Material](https://material.angular.io/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+## Tooling List
+
+- Node.js
+- Angular CLI
+- TypeScript
+- Visual Studio Code or any preferred IDE
