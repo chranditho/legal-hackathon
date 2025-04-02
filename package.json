@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "format": "prettier --write .",
     "prepare": "husky",
-    "postversion": "git add package.json package-lock.json && git commit -m 'chore(release): bump version' && git tag v$(node -p \"require('./package.json').version\") && git push && git push --tags"
+    "postversion": "git add package.json package-lock.json && git commit -m 'chore(release): bump version' || echo 'already committed' && git tag -f v$(node -p \"require('./package.json').version\") && git push && git push --tags --force"
   },
   "private": true,
   "dependencies": {
