@@ -1,6 +1,6 @@
 {
   "name": "legal-hackathon",
-  "version": "0.0.14",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,8 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "format": "prettier --write .",
-    "prepare": "husky",
-    "postversion": "git add package.json package-lock.json && git commit -m 'chore(release): bump version' || echo 'already committed' && git tag -f v$(node -p \"require('./package.json').version\") && git push && git push --tags --force"
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
