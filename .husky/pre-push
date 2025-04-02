@@ -1,0 +1,10 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+branch="$(git symbolic-ref --short HEAD)"
+if [ "$branch" = "main" ]; then
+  echo "On main: bumping patch version..."
+  npm version patch --no-git-tag-version
+else
+  echo "Not on main: skipping version bump."
+fi
