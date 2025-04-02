@@ -1,4 +1,4 @@
-import {DemoPipe} from './demo.pipe';
+import { DemoPipe } from './demo.pipe';
 
 describe('DemoPipe', () => {
   it('transform correctly', () => {

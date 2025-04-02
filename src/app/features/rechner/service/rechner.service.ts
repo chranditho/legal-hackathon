@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Rechner} from './rechner';
+import { Rechner } from './rechner';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RechnerService implements Rechner {
-
-  constructor() { }
+  constructor() {}
 }

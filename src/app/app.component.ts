@@ -1,16 +1,13 @@
-import {Component} from '@angular/core';
-import {NavComponent} from './nav/nav.component';
-import {RouterOutlet} from '@angular/router';
+import { Component } from '@angular/core';
+import { NavComponent } from './nav/nav.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    NavComponent,
-    RouterOutlet
-  ],
+  imports: [NavComponent, RouterOutlet],
   template: `
     <app-nav>
-      <router-outlet/>
+      <router-outlet />
     </app-nav>
   `,
   styles: [
@@ -18,8 +15,7 @@ import {RouterOutlet} from '@angular/router';
       :host {
         @apply block;
       }
-    `
+    `,
   ],
 })
-export class AppComponent {
-}
+export class AppComponent {}

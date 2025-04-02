@@ -8,8 +8,6 @@ import { Component } from '@angular/core';
     :host {
       display: block;
     }
-  `
+  `,
 })
-export class RechnerPageComponent {
-
-}
+export class RechnerPageComponent {}

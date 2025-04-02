@@ -1,2 +1,1 @@
-export interface Rechner {
-}
+export interface Rechner {}
