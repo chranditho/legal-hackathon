@@ -10,7 +10,6 @@ import {RouterOutlet} from '@angular/router';
   ],
   template: `
     <app-nav>
-      <h1>Legal Hackathon</h1>
       <router-outlet/>
     </app-nav>
   `,
