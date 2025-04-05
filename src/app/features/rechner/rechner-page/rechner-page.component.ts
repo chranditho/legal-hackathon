@@ -49,7 +49,7 @@ export class RechnerPageComponent {
   private readonly _formBuilder = inject(FormBuilder);
 
   ehepartnerStepGroup = this._formBuilder.group({
-    ehepartnerVerstorben: ['', Validators.required],
+    ehepartnerVerstorben: [null, Validators.required],
     nachkommenPartner: ['', Validators.required],
   });
   ehepartnerNachkommen = this._formBuilder.group({

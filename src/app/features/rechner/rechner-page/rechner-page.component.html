@@ -36,8 +36,8 @@
         <ng-template matStepLabel>Auschlussgründe</ng-template>
         <h4>Ehepartner*in bereits verstorben?</h4>
         <mat-radio-group formControlName="ehepartnerVerstorben">
-          <mat-radio-button value="ja">Ja</mat-radio-button>
-          <mat-radio-button value="nein">Nein</mat-radio-button>
+          <mat-radio-button [value]="true">Ja</mat-radio-button>
+          <mat-radio-button [value]="false">Nein</mat-radio-button>
         </mat-radio-group>
 
         @if (ehepartnerStepGroup.controls.ehepartnerVerstorben.value) {
