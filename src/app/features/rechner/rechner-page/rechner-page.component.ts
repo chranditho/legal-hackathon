@@ -13,6 +13,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
 
 export interface Task {
   name: string;
@@ -35,6 +36,7 @@ export interface Task {
     ReactiveFormsModule,
     MatCheckboxModule,
     MatCardModule,
+    MatRadioModule,
   ],
   templateUrl: './rechner-page.component.html',
   styles: `
@@ -50,16 +52,27 @@ export class RechnerPageComponent {
     ehepartnerVerstorben: ['', Validators.required],
     nachkommenPartner: ['', Validators.required],
   });
-  ehepartnerVerstorben = this._formBuilder.group({
-    verstorbenJa: ['', Validators.required],
-    verstorbenNein: ['', Validators.required],
-  });
   ehepartnerNachkommen = this._formBuilder.group({
     nachkommenJa: ['', Validators.required],
+    nachkommenNein: ['', Validators.required],
   });
   erbunwuerdig = this._formBuilder.group({
-    erbunwuerdigJa: ['', Validators.required],
-    erbunwuerdigNein: ['', Validators.required],
+    erbunwuerdig1: ['', Validators.required],
+    erbunwuerdig2: ['', Validators.required],
+    erbunwuerdig3: ['', Validators.required],
+    erbunwuerdig4: ['', Validators.required],
+  });
+  enterbung = this._formBuilder.group({
+    enterbtJa: ['', Validators.required],
+    enterbtNein: ['', Validators.required],
+  });
+  pflichtTeilsMinderungKontakt = this._formBuilder.group({
+    kontaktJa: ['', Validators.required],
+    kontaktNein: ['', Validators.required],
+  });
+  pflichtTeilsMinderungABGB = this._formBuilder.group({
+    abgbJa: ['', Validators.required],
+    abgbNein: ['', Validators.required],
   });
 
   readonly verwandschaftsverhaeltnisse = this._formBuilder.group({
