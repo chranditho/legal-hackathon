@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   templateUrl: './check-page.component.html',
   styles: `
     :host {
-      display: block;
+      @apply block;
     }
   `,
 })
