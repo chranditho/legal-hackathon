@@ -1,7 +1,7 @@
 <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
   <mat-step [stepControl]="verwandschaftsverhaeltnisse">
+    <ng-template matStepLabel>Verwandschaftsverhältnisse</ng-template>
     <section class="example-section" [formGroup]="verwandschaftsverhaeltnisse">
-      <h4>Verwandschaftsverhältnisse:</h4>
       <p>
         <mat-checkbox formControlName="ehepartner"
           >Ehegatte*in/Eingetragener Partner</mat-checkbox
@@ -21,8 +21,40 @@
       <p>
         <mat-checkbox formControlName="adoptivkind">Adoptivkinder</mat-checkbox>
       </p>
+      <div>
+        <button mat-button matStepperPrevious>Zurück</button>
+        <button mat-button matStepperNext>Weiter</button>
+      </div>
     </section>
   </mat-step>
+
+  @if (verwandschaftsverhaeltnisse.controls.ehepartner.value) {
+    <mat-step [stepControl]="ehepartnerStepGroup">
+      <form [formGroup]="ehepartnerStepGroup">
+        <ng-template matStepLabel>Auschlussgründe</ng-template>
+        <h4>Ehepartner*in bereits verstorben?</h4>
+        <section class="example-section" [formGroup]="ehepartnerVerstorben">
+          <p>
+            <mat-checkbox formControlName="verstorbenJa">Ja</mat-checkbox>
+          </p>
+          <div>
+            <button mat-button matStepperPrevious>Zurück</button>
+            <button mat-button matStepperNext>Weiter</button>
+          </div>
+        </section>
+
+        <mat-form-field>
+          <mat-label>Hat sie Nachkommen?</mat-label>
+          <input matInput formControlName="nachkommenPartner" />
+        </mat-form-field>
+
+        <div>
+          <button mat-button matStepperPrevious>Zurück</button>
+          <button mat-button matStepperNext>Weiter</button>
+        </div>
+      </form>
+    </mat-step>
+  }
 
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>

@@ -1,5 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -40,6 +45,14 @@ export interface Task {
 })
 export class RechnerPageComponent {
   private readonly _formBuilder = inject(FormBuilder);
+
+  ehepartnerStepGroup = this._formBuilder.group({
+    ehepartnerVerstorben: ['', Validators.required],
+    nachkommenPartner: ['', Validators.required],
+  });
+  ehepartnerVerstorben = this._formBuilder.group({
+    verstorbenJa: ['', Validators.required],
+  });
 
   readonly verwandschaftsverhaeltnisse = this._formBuilder.group({
     ehepartner: false,
