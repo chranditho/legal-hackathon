@@ -42,7 +42,7 @@ export class NotarPageComponent {
 
   requestUserLocation(): void {
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      position => {
         this.center = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
@@ -90,12 +90,14 @@ export class NotarPageComponent {
       setTimeout(() => {
         this.places = results
           .filter(
-            (p): p is google.maps.places.PlaceResult & {
+            (
+              p
+            ): p is google.maps.places.PlaceResult & {
               geometry: { location: google.maps.LatLng };
               name: string;
             } => !!p.geometry?.location && !!p.name
           )
-          .map((p) => ({
+          .map(p => ({
             name: p.name,
             location: p.geometry.location,
             address: p.formatted_address ?? p.vicinity ?? '',
