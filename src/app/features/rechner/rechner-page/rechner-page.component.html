@@ -1,52 +1,29 @@
-<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-  {{ !isLinear ? 'Enable linear mode' : 'Disable linear mode' }}
-</button>
 <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
-  <mat-step [stepControl]="erblasserGroup">
-    <form [formGroup]="erblasserGroup">
-      <ng-template matStepLabel>Name des Erblassers</ng-template>
-      <mat-form-field>
-        <mat-label>Vorname</mat-label>
-        <input
-          matInput
-          placeholder="First name"
-          formControlName="name"
-          required />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Nachname</mat-label>
-        <input
-          matInput
-          placeholder="Last name"
-          formControlName="name"
-          required />
-      </mat-form-field>
-      <mat-checkbox formControlName="landIstOesterreich">
-        Verstorbene Person war Österreichischer Staatsbürger
-      </mat-checkbox>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
+  <mat-step [stepControl]="verwandschaftsverhaeltnisse">
+    <section class="example-section" [formGroup]="verwandschaftsverhaeltnisse">
+      <h4>Verwandschaftsverhältnisse:</h4>
+      <p>
+        <mat-checkbox formControlName="ehepartner"
+          >Ehegatte*in/Eingetragener Partner</mat-checkbox
+        >
+      </p>
+      <p>
+        <mat-checkbox formControlName="kinder">Lebensgefährte*in</mat-checkbox>
+      </p>
+      <p>
+        <mat-checkbox formControlName="eltern"
+          >Mutter/Vater/Geschwister/Stiefkinder</mat-checkbox
+        >
+      </p>
+      <p>
+        <mat-checkbox formControlName="nachkommen">Nachkommen</mat-checkbox>
+      </p>
+      <p>
+        <mat-checkbox formControlName="adoptivkind">Adoptivkinder</mat-checkbox>
+      </p>
+    </section>
   </mat-step>
-  <mat-step [stepControl]="todestagGroup">
-    <form [formGroup]="todestagGroup">
-      <ng-template matStepLabel>Todestag</ng-template>
-      <mat-form-field>
-        <mat-label>Datum</mat-label>
-        <input matInput [matDatepicker]="picker1" formControlName="date" />
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
+
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>

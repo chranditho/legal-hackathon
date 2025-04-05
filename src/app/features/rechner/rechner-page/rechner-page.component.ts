@@ -1,11 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormBuilder,
-  Validators,
-  FormsModule,
-  ReactiveFormsModule,
-  FormControl,
-} from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -13,6 +7,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
+
+export interface Task {
+  name: string;
+  completed: boolean;
+  subtasks?: Task[];
+}
 
 @Component({
   selector: 'app-rechner-page',
@@ -28,6 +29,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     FormsModule,
     ReactiveFormsModule,
     MatCheckboxModule,
+    MatCardModule,
   ],
   templateUrl: './rechner-page.component.html',
   styles: `
@@ -37,16 +39,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   `,
 })
 export class RechnerPageComponent {
-  private _formBuilder = inject(FormBuilder);
+  private readonly _formBuilder = inject(FormBuilder);
 
-  erblasserGroup = this._formBuilder.group({
-    name: ['', Validators.required],
-    landIstOesterreich: [false, Validators.requiredTrue],
-  });
-  todestagGroup = this._formBuilder.group({
-    date: ['', Validators.required],
-    datum: new FormControl(new Date()),
-    serializedDate: new FormControl(new Date().toISOString()),
+  readonly verwandschaftsverhaeltnisse = this._formBuilder.group({
+    ehepartner: false,
+    kinder: false,
+    eltern: false,
+    nachkommen: false,
+    adoptivkind: false,
   });
 
   isLinear = true;
