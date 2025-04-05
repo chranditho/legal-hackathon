@@ -52,6 +52,14 @@ export class RechnerPageComponent {
   });
   ehepartnerVerstorben = this._formBuilder.group({
     verstorbenJa: ['', Validators.required],
+    verstorbenNein: ['', Validators.required],
+  });
+  ehepartnerNachkommen = this._formBuilder.group({
+    nachkommenJa: ['', Validators.required],
+  });
+  erbunwuerdig = this._formBuilder.group({
+    erbunwuerdigJa: ['', Validators.required],
+    erbunwuerdigNein: ['', Validators.required],
   });
 
   readonly verwandschaftsverhaeltnisse = this._formBuilder.group({

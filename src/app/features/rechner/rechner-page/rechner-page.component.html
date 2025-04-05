@@ -37,16 +37,37 @@
           <p>
             <mat-checkbox formControlName="verstorbenJa">Ja</mat-checkbox>
           </p>
-          <div>
-            <button mat-button matStepperPrevious>Zurück</button>
-            <button mat-button matStepperNext>Weiter</button>
-          </div>
+          <p>
+            <mat-checkbox formControlName="verstorbenNein">Nein</mat-checkbox>
+          </p>
         </section>
 
-        <mat-form-field>
-          <mat-label>Hat sie Nachkommen?</mat-label>
-          <input matInput formControlName="nachkommenPartner" />
-        </mat-form-field>
+        @if (ehepartnerVerstorben.controls.verstorbenJa.value) {
+          <h4>Hat sie Nachkommen?</h4>
+          <section class="example-section" [formGroup]="ehepartnerNachkommen">
+            <p>
+              <mat-checkbox formControlName="nachkommenJa">Ja</mat-checkbox>
+            </p>
+          </section>
+
+          <h4>Wie viele?</h4>
+          <mat-form-field>
+            <mat-label>Anzahl</mat-label>
+            <input matInput formControlName="nachkommenPartner" />
+          </mat-form-field>
+        } @else {
+          <h4>Erbunwürdig nach §§539, 540, 541 ABGB?</h4>
+          <section class="example-section" [formGroup]="erbunwuerdig">
+            <p>
+              <mat-checkbox formControlName="erbunwuerdigJa">Ja</mat-checkbox>
+            </p>
+            <p>
+              <mat-checkbox formControlName="erbunwuerdigNein"
+                >Nein</mat-checkbox
+              >
+            </p>
+          </section>
+        }
 
         <div>
           <button mat-button matStepperPrevious>Zurück</button>
