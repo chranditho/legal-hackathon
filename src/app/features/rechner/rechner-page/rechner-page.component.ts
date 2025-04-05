@@ -75,7 +75,7 @@ export class RechnerPageComponent {
     abgbNein: ['', Validators.required],
   });
 
-  readonly verwandschaftsverhaeltnisse = this._formBuilder.group({
+  readonly verwandtschaftsverhaeltnisse = this._formBuilder.group({
     ehepartner: false,
     kinder: false,
     eltern: false,
