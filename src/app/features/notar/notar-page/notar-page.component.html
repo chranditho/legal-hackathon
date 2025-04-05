@@ -1,27 +1,27 @@
 <h2>🧾 Notarsuche – Testamentsangelegenheiten</h2>
 
 <button class="btn" (click)="requestUserLocation()" [disabled]="isLoading">
-  📍
-  {{ center ? 'Standort aktualisieren' : 'Standort anzeigen & Notare suchen' }}
+  📍 {{ mapVisible ? 'Standort aktualisieren' : 'Standort anzeigen & Notare suchen' }}
 </button>
 
 <div *ngIf="isLoading">⏳ Suche nach Notaren ...</div>
 
+<!-- ✅ Always render map, only toggle visibility -->
 <google-map
-  *ngIf="center"
   [center]="center"
   [zoom]="zoom"
+  [style.display]="mapVisible ? 'block' : 'none'"
   height="500px"
   width="100%"
   style="margin-top: 1rem">
-  <!-- 🔵 Your location -->
+
   <map-marker
+    *ngIf="mapVisible"
     [position]="center"
     title="Ihr Standort"
     icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png">
   </map-marker>
 
-  <!-- 🔴 Notaries -->
   <map-marker
     *ngFor="let place of places; let i = index; trackBy: trackByIndex"
     [position]="place.location"
@@ -30,10 +30,8 @@
     (mapClick)="onMarkerClick(place, i)">
   </map-marker>
 
-  <!-- 🪪 Info -->
   <map-info-window *ngIf="selectedPlace" (closeclick)="selectedPlace = null">
-    <strong>{{ selectedPlace.name }}</strong
-    ><br />
+    <strong>{{ selectedPlace.name }}</strong><br />
     <small>{{ selectedPlace.address }}</small>
   </map-info-window>
 </google-map>
