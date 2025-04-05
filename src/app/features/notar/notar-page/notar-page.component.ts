@@ -3,7 +3,8 @@ import {
   ViewChild,
   ViewChildren,
   QueryList,
-  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoogleMap, MapMarker, MapInfoWindow } from '@angular/google-maps';
@@ -20,61 +21,51 @@ interface SafePlaceResult {
   imports: [CommonModule, GoogleMap, MapMarker, MapInfoWindow],
   templateUrl: './notar-page.component.html',
   styleUrls: ['./notar-page.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NotarPageComponent implements AfterViewInit {
+export class NotarPageComponent {
   @ViewChild(GoogleMap) map!: GoogleMap;
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
   @ViewChildren(MapMarker) markers!: QueryList<MapMarker>;
 
-  center: google.maps.LatLngLiteral | undefined;
+  center: google.maps.LatLngLiteral = { lat: 48.2082, lng: 16.3738 }; // default Vienna
   zoom = 14;
-  places: SafePlaceResult[] = [];
+  mapVisible = false;
 
+  places: SafePlaceResult[] = [];
   selectedPlace: SafePlaceResult | null = null;
   isLoading = false;
 
   private placesLoaded = false;
 
-  ngAfterViewInit(): void {
-    const checkMapReady = setInterval(() => {
-      const mapReady = !!this.map?.googleMap;
-      if (mapReady) {
-        clearInterval(checkMapReady);
-        console.log('🟢 googleMap ready');
-        this.maybeSearch();
-      }
-    }, 200);
-  }
+  constructor(private cdr: ChangeDetectorRef) {}
 
   requestUserLocation(): void {
     navigator.geolocation.getCurrentPosition(
-      position => {
+      (position) => {
         this.center = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
-        console.log('📍 Standort:', this.center);
-        this.maybeSearch();
+        this.mapVisible = true;
+        this.cdr.markForCheck();
+
+        setTimeout(() => {
+          if (this.map?.googleMap) {
+            console.log('🟢 Map & location ready → maybeSearch');
+            this.searchNotaries();
+          } else {
+            console.error('❌ map.googleMap not available!');
+          }
+        }, 300);
       },
       () => alert('❌ Zugriff auf den Standort verweigert.')
     );
   }
 
-  maybeSearch(): void {
-    if (this.map?.googleMap && this.center) {
-      console.log('🔁 maybeSearch() called');
-      this.searchNotaries().catch(err => {
-        console.error('🔥 Fehler beim Laden der Notare:', err);
-      });
-    } else {
-      console.log('🕒 map or center not ready');
-    }
-  }
-
   async searchNotaries(): Promise<void> {
     this.isLoading = true;
 
-    // ✅ Dynamically import the 'places' library (new style)
     if (!this.placesLoaded) {
       await google.maps.importLibrary('places');
       this.placesLoaded = true;
@@ -83,40 +74,35 @@ export class NotarPageComponent implements AfterViewInit {
     const service = new google.maps.places.PlacesService(this.map.googleMap!);
 
     const request: google.maps.places.TextSearchRequest = {
-      location: this.center!,
+      location: this.center,
       radius: 5000,
       query: 'Notar Testament',
     };
 
-    console.log('🛰 Suche gestartet:', this.center);
-
     service.textSearch(request, (results, status) => {
       this.isLoading = false;
-
-      console.log('📦 Ergebnisstatus:', status);
-      console.log('📦 Ergebnisse:', results);
 
       if (status !== google.maps.places.PlacesServiceStatus.OK || !results) {
         alert('❌ Keine Notare gefunden.');
         return;
       }
 
-      this.places = results
-        .filter(
-          (
-            p
-          ): p is google.maps.places.PlaceResult & {
-            geometry: { location: google.maps.LatLng };
-            name: string;
-          } => !!p.geometry?.location && !!p.name
-        )
-        .map(p => ({
-          name: p.name,
-          location: p.geometry.location,
-          address: p.formatted_address ?? p.vicinity ?? '',
-        }));
+      setTimeout(() => {
+        this.places = results
+          .filter(
+            (p): p is google.maps.places.PlaceResult & {
+              geometry: { location: google.maps.LatLng };
+              name: string;
+            } => !!p.geometry?.location && !!p.name
+          )
+          .map((p) => ({
+            name: p.name,
+            location: p.geometry.location,
+            address: p.formatted_address ?? p.vicinity ?? '',
+          }));
 
-      console.log('✅ Verwendete Orte:', this.places);
+        this.cdr.markForCheck();
+      }, 0);
     });
   }
 
