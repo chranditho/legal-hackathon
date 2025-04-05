@@ -1,7 +1,8 @@
 <h2>🧾 Notarsuche – Testamentsangelegenheiten</h2>
 
 <button class="btn" (click)="requestUserLocation()" [disabled]="isLoading">
-  📍 {{ center ? 'Standort aktualisieren' : 'Standort anzeigen & Notare suchen' }}
+  📍
+  {{ center ? 'Standort aktualisieren' : 'Standort anzeigen & Notare suchen' }}
 </button>
 
 <div *ngIf="isLoading">⏳ Suche nach Notaren ...</div>
@@ -13,7 +14,6 @@
   height="500px"
   width="100%"
   style="margin-top: 1rem">
-
   <!-- 🔵 Your location -->
   <map-marker
     [position]="center"
@@ -32,7 +32,8 @@
 
   <!-- 🪪 Info -->
   <map-info-window *ngIf="selectedPlace" (closeclick)="selectedPlace = null">
-    <strong>{{ selectedPlace.name }}</strong><br />
+    <strong>{{ selectedPlace.name }}</strong
+    ><br />
     <small>{{ selectedPlace.address }}</small>
   </map-info-window>
 </google-map>
