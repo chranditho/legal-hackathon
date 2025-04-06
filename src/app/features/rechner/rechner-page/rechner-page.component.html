@@ -162,115 +162,31 @@
     </div>
   </mat-step>
 
-  @if (false) {
-    <mat-step [stepControl]="ehepartnerStepGroup">
-      <form [formGroup]="ehepartnerStepGroup">
-        <ng-template matStepLabel>Auschlussgründe</ng-template>
-        <h4>Ehepartner*in bereits verstorben?</h4>
-        <mat-radio-group formControlName="ehepartnerVerstorben">
-          <mat-radio-button [value]="true">Ja</mat-radio-button>
-          <mat-radio-button [value]="false">Nein</mat-radio-button>
-        </mat-radio-group>
-
-        @if (ehepartnerStepGroup.controls.ehepartnerVerstorben.value) {
-          <h4>Hat sie Nachkommen?</h4>
-          <mat-radio-group formControlName="ehepartnerNachkommen">
-            <mat-radio-button [value]="true">Ja</mat-radio-button>
-            <mat-radio-button [value]="false">Nein</mat-radio-button>
-          </mat-radio-group>
-        }
-        @if (ehepartnerStepGroup.controls.ehepartnerNachkommen.value) {
-          <h4>Wie viele?</h4>
-          <mat-form-field>
-            <mat-label>Anzahl</mat-label>
-            <input matInput formControlName="nachkommenPartner" />
-          </mat-form-field>
-        }
-        @if (
-          !ehepartnerStepGroup.controls.ehepartnerVerstorben.value &&
-          ehepartnerStepGroup.touched
-        ) {
-          <h4>Fragen zu § 541 ABGB - Erbunwürdigkeit?</h4>
-          <section [formGroup]="erbunwuerdig">
-            <p>
-              <mat-checkbox formControlName="erbunwuerdig1"
-                >Haben Sie gegen den Ehegatten, eingetragenen Partner,
-                Lebensgefährten oder Verwandte in gerader Linie des Verstorbenen
-                eine vorsätzliche Straftat begangen, die mit mehr als einem Jahr
-                Freiheitsstrafe bedroht ist?
-              </mat-checkbox>
-            </p>
-            <p>
-              <mat-checkbox formControlName="erbunwuerdig2"
-                >Haben Sie dem Verstorbenen in verwerflicher Weise schweres
-                seelisches Leid zugefügt?
-              </mat-checkbox>
-            </p>
-            <p>
-              <mat-checkbox formControlName="erbunwuerdig3"
-                >Haben Sie Ihre Pflichten aus dem Rechtsverhältnis zwischen
-                Eltern und Kindern gegenüber dem Verstorbenen gröblich
-                vernachlässigt?
-              </mat-checkbox>
-            </p>
-            <p>
-              <mat-checkbox formControlName="erbunwuerdig4"
-                >War der Verstorbene nicht in der Lage, Sie zu enterben, und hat
-                er Ihnen auch nicht zu erkennen gegeben, dass er Ihnen verziehen
-                hat?
-              </mat-checkbox>
-            </p>
-          </section>
-        }
-        @if (erbunwuerdig.controls.erbunwuerdig1.value) {
-          <h4>
-            Wurde die Person im Testament ausdrücklich und begründet enterbt?
-          </h4>
-          <section [formGroup]="enterbung">
-            <p>
-              <mat-checkbox formControlName="enterbtJa">Ja</mat-checkbox>
-            </p>
-            <p>
-              <mat-checkbox formControlName="enterbtNein">Nein</mat-checkbox>
-            </p>
-          </section>
-        }
-        @if (enterbung.controls.enterbtNein.value) {
-          <h4>
-            Bestand in den letzten 20 Jahren kein persönlicher Kontakt zum
-            Erblasser ohne dessen Verschulden?
-          </h4>
-          <section [formGroup]="pflichtTeilsMinderungKontakt">
-            <p>
-              <mat-checkbox formControlName="kontaktJa">Ja</mat-checkbox>
-            </p>
-            <p>
-              <mat-checkbox formControlName="kontaktNein">Nein</mat-checkbox>
-            </p>
-          </section>
-          <h4>
-            Wurde im Testament eine ausdrückliche Pflichtteilsminderung gemäß §
-            773a ABGB angeordnet?
-          </h4>
-          <section [formGroup]="pflichtTeilsMinderungABGB">
-            <p>
-              <mat-checkbox formControlName="abgbJa">Ja</mat-checkbox>
-            </p>
-            <p>
-              <mat-checkbox formControlName="abgbNein">Nein</mat-checkbox>
-            </p>
-          </section>
-        }
-      </form>
-    </mat-step>
-  }
+  <mat-step>
+    <ng-template matStepLabel>Vermögenswerte</ng-template>
+    <h3>Bitte schätzen Sie das Gesamtvermögen des Vertsorbenen/Erbgeber</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Vermögen</mat-label>
+      <input matInput [formControl]="vermoegenswert" placeholder="Vermögen" />
+      <mat-hint>Vermögenswertschätzung in €</mat-hint>
+    </mat-form-field>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
 
   <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+    <ng-template matStepLabel>Schulden</ng-template>
+    <h3>Bitte schätzen Sie die gesammten Schulden des Verstorbenen/Erbgeber</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Schulden</mat-label>
+      <input matInput [formControl]="schuldensswert" placeholder="Schulden" />
+      <mat-hint>Schuldenschätzung in €</mat-hint>
+    </mat-form-field>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
     </div>
   </mat-step>
 </mat-stepper>

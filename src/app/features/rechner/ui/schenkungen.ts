@@ -1,12 +1,23 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, Validators } from '@angular/forms';
 import { Persen } from '../rechner-page/rechner-page.component';
 import { ProfilePicComponent } from './icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  imports: [CommonModule, MatCheckboxModule, FormsModule, ProfilePicComponent],
+  imports: [
+    CommonModule,
+    MatCheckboxModule,
+    FormsModule,
+    ProfilePicComponent,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+  ],
   selector: 'app-schenkungen',
   template: `
     <section>
@@ -21,6 +32,14 @@ import { ProfilePicComponent } from './icon';
               </app-profile-pic
               >{{ person.Art.name || person.Art.PersonenArt }}
             </div>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Wert</mat-label>
+              <input
+                matInput
+                [formControl]="schenkungenWert"
+                placeholder="Schenkung in €" />
+            </mat-form-field>
             <div class="person-type">{{ person.Art.PersonenArt }}</div>
             <div class="person-exclusion-options"></div>
           </div>
@@ -86,4 +105,8 @@ import { ProfilePicComponent } from './icon';
 })
 export class SchenkungenComponent {
   @Input() personenListe: Persen[] = [];
+  schenkungenWert = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^[A-Z0-9]{10}$/), // Adjust pattern to your material number format
+  ]);
 }
