@@ -3,11 +3,11 @@
 <button class="btn" (click)="requestUserLocation()" [disabled]="isLoading">
   📍
   {{
-    mapVisible ? 'Standort aktualisieren' : 'Standort anzeigen & Notare suchen'
+    mapVisible ? 'Standort aktualisieren' : 'Standort anzeigen & Vermittlungen suchen'
   }}
 </button>
 
-<div *ngIf="isLoading">⏳ Suche nach Notaren und Rechtsanwälten ...</div>
+<div *ngIf="isLoading">⏳ Suche nach Vermittlungen und Rechtsanwälten ...</div>
 
 <!-- ✅ Always render map, only toggle visibility -->
 <google-map

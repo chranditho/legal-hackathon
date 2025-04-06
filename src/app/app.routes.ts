@@ -16,11 +16,11 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'notar',
+    path: 'vermittlung',
     loadComponent: () =>
-      import('./features/notar/notar-page/notar-page.component').then(
-        m => m.NotarPageComponent
-      ),
+      import(
+        './features/vermittlung/vermittlung-page/vermittlung-page.component'
+      ).then(m => m.VermittlungPageComponent),
   },
   {
     path: 'dokumente',
