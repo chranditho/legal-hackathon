@@ -1,6 +1,6 @@
 <mat-card appearance="outlined" class="h-full flex flex-col w-80 justify-between">
   <div>
-    <mat-card-header>
+    <mat-card-header class="mb-4 flex justify-center">
       <mat-card-title>{{ card().title }}</mat-card-title>
     </mat-card-header>
     <img
@@ -11,8 +11,7 @@
       [alt]="card().title"
     />
     <mat-card-content>
-      <p class="text-center">{{ card().text }}
-      </p>
+      <p class="text-center mt-4">{{ card().text }}</p>
     </mat-card-content>
   </div>
   <mat-card-actions class="self-end">
