@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common'; // Added this line
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -71,6 +72,17 @@ export class RechnerPageComponent implements OnInit {
   public verwandtschaftsverhaeltnisse: FormGroup;
   personenListe: Persen[] = [];
   anzahlOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  vermoegenswert = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^[A-Z0-9]{10}$/) // Adjust pattern to your material number format
+  ]);
+
+  schuldensswert = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^[A-Z0-9]{10}$/) // Adjust pattern to your material number format
+  ]);
+  
   // Set this based on your Angular version
   isAngular15OrHigher = false;
   isLinear = true;
