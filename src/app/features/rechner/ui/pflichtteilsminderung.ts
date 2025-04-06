@@ -5,8 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { Persen } from '../rechner-page/rechner-page.component';
 import { ProfilePicComponent } from './icon';
 
+
 @Component({
-  imports: [CommonModule, MatCheckboxModule, FormsModule, ProfilePicComponent],
+  imports: [CommonModule, MatCheckboxModule, FormsModule, ProfilePicComponent, ],
   selector: 'app-pflichtteilsmilderung',
   template: `
     <section>
