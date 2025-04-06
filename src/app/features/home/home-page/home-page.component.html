@@ -1,9 +1,9 @@
 <section
-  class="min-h-screen flex flex-col items-center justify-center p-8 bg-gray-50">
-  <h1 class="text-6xl md:text-8xl font-bold mb-6 text-center">
-    <span class="text-blue-500">Fair</span
-    ><span class="text-orange-500">Erben</span>
-  </h1>
+  class=" flex flex-col items-center justify-center p-8 bg-gray-50">
+  <div class="text-6xl md:text-8xl font-bold mb-6 text-center">
+    <span class="text-blue-800">Fair</span
+    ><span class="text-blue-500">Erben</span>
+  </div>
   <p class="text-xl md:text-2xl text-gray-700 mb-12 text-center">
     einfach. fair. transparent.
   </p>
@@ -12,10 +12,35 @@
     class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
     Jetzt starten
   </a>
-  <app-product-card
-    [card]="{
+  <div class="flex gap-8 flex-wrap mt-12">
+    <app-product-card
+      [card]="{
       title: 'Pflichtteilrechner',
-      text: 'rechner blala',
+      text: 'Berechnet gesetzliche Erbansprüche verständlich und nachvollziehbar – ganz ohne juristischen Hintergrund. Auch komplexe Sonderkonstellationen wie Erbunwürdigkeit, Pflichtteilsminderungen oder Schenkungen werden rechtlich korrekt berücksichtigt.',
       imageUrl: 'asdöflkjj',
+      link: '/rechner'
     }" />
+    <app-product-card
+      class="height-full"
+      [card]="{
+      title: 'Testaments-Kompass',
+      text: 'Gibt erste Orientierung, ob ein Testament den formellen Anforderungen entspricht',
+      imageUrl: 'asdöflkjj',
+      link: '/rechner'
+    }" />
+    <app-product-card
+      [card]="{
+      title: 'Vermittlung',
+      text: 'Verlinkt Nutzer:innen direkt und effizient zu passenden Notar:innen und Anwält:innen für rechtlich verbindliche Schritte.',
+      imageUrl: 'asdöflkjj',
+      link: '/vermittlung'
+    }" />
+    <app-product-card
+      [card]="{
+      title: 'Musterdokumente',
+      text: 'Unser Dokumente-Guide bietet verständliche Vorlagen für eine strukturierte Vorsorge. Juristisch inspiriert, aber alltagstauglich und sofort nutzbar. ',
+      imageUrl: 'asdöflkjj',
+      link: '/dokumente'
+    }" />
+  </div>
 </section>
