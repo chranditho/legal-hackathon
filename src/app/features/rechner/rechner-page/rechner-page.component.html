@@ -1,4 +1,11 @@
-<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+<div class="p-6 rounded-2xl bg-blue-50 m-4">
+  <h3>So funktioniert's :</h3>
+  <p>Geben Sie das geschätzte Vermögen sowie Informationen zu Verwandtschaftsverhältnissen ein. Unser Tool berechnet
+    automatisch die gesetzlichen Pflichtteile – unter Berücksichtigung aller relevanten Sonderkonstellationen wie
+    Schenkungen, Pflichtteilsminderung oder Enterbungen.
+  </p>
+</div>
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper class="m-4 rounded-2xl">
   <mat-step [stepControl]="verwandtschaftsverhaeltnisse">
     <ng-template matStepLabel>Verwandtschaftsverhältnisse</ng-template>
     <section [formGroup]="verwandtschaftsverhaeltnisse">
@@ -19,10 +26,10 @@
       </p>
       <div>
         <p>
-          <mat-checkbox formControlName="mutter"> Mutter </mat-checkbox>
+          <mat-checkbox formControlName="mutter"> Mutter</mat-checkbox>
         </p>
         <p>
-          <mat-checkbox formControlName="vater"> Vater </mat-checkbox>
+          <mat-checkbox formControlName="vater"> Vater</mat-checkbox>
         </p>
         <p>
           <mat-checkbox formControlName="geschwister">
@@ -37,7 +44,8 @@
             <mat-button-toggle
               *ngFor="let num of anzahlOptions"
               [value]="num"
-              >{{ num }}</mat-button-toggle
+            >{{ num }}
+            </mat-button-toggle
             >
           </mat-button-toggle-group>
         </div>
@@ -55,7 +63,8 @@
             <mat-button-toggle
               *ngFor="let num of anzahlOptions"
               [value]="num"
-              >{{ num }}</mat-button-toggle
+            >{{ num }}
+            </mat-button-toggle
             >
           </mat-button-toggle-group>
         </div>
