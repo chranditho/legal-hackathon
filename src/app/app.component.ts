@@ -9,7 +9,7 @@ import { NgIf } from '@angular/common';
   standalone: true,
   imports: [NavComponent, RouterOutlet, CookieBannerComponent, NgIf],
   template: `
-    <app-cookie-banner (consentGiven)="onConsent()"></app-cookie-banner>
+    <app-cookie-banner (consentGiven)="onConsent()" />
 
     <div
       [class.pointer-events-none]="!cookiesAccepted"
