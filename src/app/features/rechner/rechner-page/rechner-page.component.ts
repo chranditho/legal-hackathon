@@ -283,6 +283,34 @@ export class RechnerPageComponent implements OnInit {
     console.log(`All persons with type ${personenArt} removed`);
     console.log('Current list:', this.personenListe);
   }
+
+  public calculateErbe(){
+    //case1
+    if (this.personenListe.some(person => person.Art.PersonenArt === 'Ehegatte') && this.personenListe.some(person => person.Art.PersonenArt === 'Kinder') && this.personenListe.filter(person => 
+      person.Art.PersonenArt === 'Ehegatte')[0].Erbwuerdig && !this.personenListe.filter(person => 
+        person.Art.PersonenArt === 'Ehegatte')[0].Enterbung && this.personenListe.filter(person => 
+          person.Art.PersonenArt === 'Ehegatte')[0].Pflichtanteilsberechtigt) {
+
+            this.personenListe.filter(person => 
+              person.Art.PersonenArt === 'Ehegatte')[0].Erbwert = Number(this.vermoegenswert.value)/3;
+
+              this.vermoegenswert.setValue( (Number(this.vermoegenswert.value)*2/3).toString());
+
+              //ist gatte erbminderung?
+              if (this.personenListe.filter(person => 
+                person.Art.PersonenArt === 'Ehegatte')[0].Pflichtanteilsminderung) {
+                
+                  this.personenListe.filter(person => 
+                    person.Art.PersonenArt === 'Ehegatte')[0].Erbwert = (this.personenListe.filter(person => 
+                      person.Art.PersonenArt === 'Ehegatte')[0].Erbwert)/2
+
+                      this.vermoegenswert.setValue( (Number(this.vermoegenswert.value) + this.personenListe.filter(person => 
+                        person.Art.PersonenArt === 'Ehegatte')[0].Erbwert).toString());
+
+              }
+      
+    }
+  }
 }
 
 // PersonType class definition
@@ -323,6 +351,7 @@ export interface IPersen {
   Enterbung: boolean;
   Pflichtanteilsminderung: boolean;
   Pflichtanteilsberechtigt: boolean;
+  Erbwert: number;
 }
 
 // Class implementation
@@ -333,6 +362,7 @@ export class Persen implements IPersen {
   Enterbung: boolean;
   Pflichtanteilsminderung: boolean;
   Pflichtanteilsberechtigt: boolean;
+  Erbwert: number;
 
   constructor(
     art: PersonType = new PersonType(),
@@ -340,7 +370,8 @@ export class Persen implements IPersen {
     erbwuerdig = false,
     enterbung = false,
     pflichtanteilsminderung = false,
-    pflichtanteilsberechtigt = false
+    pflichtanteilsberechtigt = false,
+    erbwert = 0
   ) {
     this.Art = art;
     this.Vorverstorben = vorverstorben;
@@ -348,5 +379,6 @@ export class Persen implements IPersen {
     this.Enterbung = enterbung;
     this.Pflichtanteilsminderung = pflichtanteilsminderung;
     this.Pflichtanteilsberechtigt = pflichtanteilsberechtigt;
+    this.Erbwert = erbwert;
   }
 }
