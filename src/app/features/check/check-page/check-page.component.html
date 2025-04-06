@@ -21,11 +21,18 @@
           rechtliche Dokumente hoch und erhalte innerhalb kurzer Zeit ein
           fundiertes Feedback.
         </p>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="openDisclaimerDialog()"
+        >
+          Let’s go
+        </button>
       </div>
     </div>
     <p class="flex-none">
       <img
-        ngSrc="assets/app.gif"
+        ngSrc="/assets/app.gif"
         alt="Application demonstration"
         class="max-w-full h-auto rounded-3xl shadow"
         width="200"
