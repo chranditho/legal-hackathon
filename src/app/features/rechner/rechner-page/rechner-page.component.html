@@ -189,4 +189,24 @@
       <button mat-button matStepperNext>Weiter</button>
     </div>
   </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Berechnen</ng-template>
+    <h3>Berechnen</h3>
+
+    <button (click)="calculateErbe()">Click Me</button>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Erbe</ng-template>
+    <app-erbe [personenListe]="filteredPersons"></app-erbe>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
 </mat-stepper>
