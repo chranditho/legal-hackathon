@@ -9,7 +9,7 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'check',
+    path: 'kompass',
     loadComponent: () =>
       import('./features/check/check-page/check-page.component').then(
         m => m.CheckPageComponent
