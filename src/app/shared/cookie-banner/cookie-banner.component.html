@@ -1,6 +1,8 @@
 <div *ngIf="showBanner" class="cookie-banner">
   <span
-    >We use cookies to enhance your experience. By continuing, you agree.</span
-  >
+    >We use cookies to enhance your experience. By continuing, you agree.
+    <a routerLink="/impressum">Impressum</a> ·
+    <a routerLink="/datenschutzerklaerung">Datenschutzerklärung</a>
+  </span>
   <button (click)="acceptCookies()">Accept</button>
 </div>
