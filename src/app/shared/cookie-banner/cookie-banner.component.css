@@ -18,3 +18,14 @@
   padding: 0.5em 1em;
   cursor: pointer;
 }
+
+.cookie-banner a {
+  position: fixed;
+  color: #007bff;
+  text-decoration: underline;
+  margin: 0 0.5rem;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
