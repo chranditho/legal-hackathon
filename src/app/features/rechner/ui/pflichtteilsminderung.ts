@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { Persen } from '../rechner-page/rechner-page.component';
-import { ProfilePicComponent } from "./icon";
+import { ProfilePicComponent } from './icon';
 
 @Component({
   imports: [CommonModule, MatCheckboxModule, FormsModule, ProfilePicComponent],
@@ -17,7 +17,9 @@ import { ProfilePicComponent } from "./icon";
             class="person-box"
             *ngFor="let person of personenListe; let i = index">
             <div class="person-name">
-            <app-profile-pic [personenArt]="person.Art.PersonenArt"> </app-profile-pic>{{ person.Art.name || person.Art.PersonenArt }}
+              <app-profile-pic [personenArt]="person.Art.PersonenArt">
+              </app-profile-pic
+              >{{ person.Art.name || person.Art.PersonenArt }}
             </div>
             <div class="person-type">{{ person.Art.PersonenArt }}</div>
             <div class="person-exclusion-options">
@@ -25,16 +27,21 @@ import { ProfilePicComponent } from "./icon";
                 <mat-checkbox
                   [(ngModel)]="person.Pflichtanteilsminderung"
                   name="verstorben"
-                  >Hatte diese Person  und der Verstorbene zu keiner Zeit oder über einen längeren Zeitraum vor dem Tod des Verstorbenen kein familiäres Naheverhältnis, wie es zwischen Familienangehörigen üblich ist? </mat-checkbox
-                >
+                  >Hatte diese Person und der Verstorbene zu keiner Zeit oder
+                  über einen längeren Zeitraum vor dem Tod des Verstorbenen kein
+                  familiäres Naheverhältnis, wie es zwischen Familienangehörigen
+                  üblich ist?
+                </mat-checkbox>
               </p>
-              <br>
+              <br />
               <p>
                 <mat-checkbox
                   [(ngModel)]="person.Pflichtanteilsminderung"
                   name="verstorben"
-                  >Hat der Verstorbene den Kontakt zu dieser Person ohne berechtigten Grund gemieden oder selbst Anlass für den fehlenden Kontakt gegeben? </mat-checkbox
-                >
+                  >Hat der Verstorbene den Kontakt zu dieser Person ohne
+                  berechtigten Grund gemieden oder selbst Anlass für den
+                  fehlenden Kontakt gegeben?
+                </mat-checkbox>
               </p>
             </div>
           </div>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { Persen } from '../rechner-page/rechner-page.component';
-import { ProfilePicComponent } from "./icon";
+import { ProfilePicComponent } from './icon';
 
 @Component({
   imports: [CommonModule, MatCheckboxModule, FormsModule, ProfilePicComponent],
@@ -17,7 +17,9 @@ import { ProfilePicComponent } from "./icon";
             class="person-box"
             *ngFor="let person of personenListe; let i = index">
             <div class="person-name">
-              <app-profile-pic [personenArt]="person.Art.PersonenArt"> </app-profile-pic> {{ person.Art.name || person.Art.PersonenArt }}
+              <app-profile-pic [personenArt]="person.Art.PersonenArt">
+              </app-profile-pic>
+              {{ person.Art.name || person.Art.PersonenArt }}
             </div>
             <div class="person-type">{{ person.Art.PersonenArt }}</div>
             <div class="person-exclusion-options">
@@ -25,31 +27,39 @@ import { ProfilePicComponent } from "./icon";
                 <mat-checkbox
                   [(ngModel)]="person['Erbwuerdig']"
                   name="erbwuerdig"
-                  >Hat diese Person gegen den Ehegatten, eingetragenen Partner, Lebensgefährten oder Verwandte in gerader Linie des Verstorbenen eine vorsätzliche Straftat begangen, die mit mehr als einem Jahr Freiheitsstrafe bedroht ist? 
+                  >Hat diese Person gegen den Ehegatten, eingetragenen Partner,
+                  Lebensgefährten oder Verwandte in gerader Linie des
+                  Verstorbenen eine vorsätzliche Straftat begangen, die mit mehr
+                  als einem Jahr Freiheitsstrafe bedroht ist?
                 </mat-checkbox>
               </p>
-              <br>
+              <br />
               <p>
                 <mat-checkbox
                   [(ngModel)]="person['Erbwuerdig']"
                   name="erbwuerdig"
-                  >Hat diese Person dem Verstorbenen in verwerflicher Weise schweres seelisches Leid zugefügt?
+                  >Hat diese Person dem Verstorbenen in verwerflicher Weise
+                  schweres seelisches Leid zugefügt?
                 </mat-checkbox>
               </p>
-              <br>
+              <br />
               <p>
                 <mat-checkbox
                   [(ngModel)]="person['Erbwuerdig']"
                   name="erbwuerdig"
-                  >Hat diese Person Ihre Pflichten aus dem Rechtsverhältnis zwischen Eltern und Kindern gegenüber dem Verstorbenen gröblich vernachlässigt? 
+                  >Hat diese Person Ihre Pflichten aus dem Rechtsverhältnis
+                  zwischen Eltern und Kindern gegenüber dem Verstorbenen
+                  gröblich vernachlässigt?
                 </mat-checkbox>
               </p>
-              <br>
+              <br />
               <p>
                 <mat-checkbox
                   [(ngModel)]="person['Erbwuerdig']"
                   name="erbwuerdig"
-                  >War der Verstorbene nicht in der Lage, diese Person zu enterben, und hat er Ihnen auch nicht zu erkennen gegeben, dass er Ihnen verziehen hat? 
+                  >War der Verstorbene nicht in der Lage, diese Person zu
+                  enterben, und hat er Ihnen auch nicht zu erkennen gegeben,
+                  dass er Ihnen verziehen hat?
                 </mat-checkbox>
               </p>
             </div>

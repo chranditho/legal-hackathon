@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { Persen } from '../rechner-page/rechner-page.component';
-import { ProfilePicComponent } from "./icon";
+import { ProfilePicComponent } from './icon';
 
 @Component({
   imports: [CommonModule, MatCheckboxModule, FormsModule, ProfilePicComponent],
@@ -17,7 +17,9 @@ import { ProfilePicComponent } from "./icon";
             class="person-box"
             *ngFor="let person of personenListe; let i = index">
             <div class="person-name">
-            <app-profile-pic [personenArt]="person.Art.PersonenArt"> </app-profile-pic>{{ person.Art.name || person.Art.PersonenArt }}
+              <app-profile-pic [personenArt]="person.Art.PersonenArt">
+              </app-profile-pic
+              >{{ person.Art.name || person.Art.PersonenArt }}
             </div>
             <div class="person-type">{{ person.Art.PersonenArt }}</div>
             <div class="person-exclusion-options">
