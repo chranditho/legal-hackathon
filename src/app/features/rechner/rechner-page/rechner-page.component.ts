@@ -24,6 +24,7 @@ import { NachkommenComponent } from '../ui/nachkommen';
 import { EnterbungComponent } from '../ui/enterbung';
 import { PflichtteilsmilderungComponent } from '../ui/pflichtteilsminderung';
 import { SchenkungenComponent } from '../ui/schenkungen';
+import { ErbeComponent } from '../ui/erbe';
 
 export interface Task {
   name: string;
@@ -62,6 +63,7 @@ export interface Task {
     EnterbungComponent,
     PflichtteilsmilderungComponent,
     SchenkungenComponent,
+    ErbeComponent,
   ],
   templateUrl: './rechner-page.component.html',
   styles: `
@@ -317,6 +319,99 @@ export class RechnerPageComponent implements OnInit {
     console.log(`All persons with type ${personenArt} removed`);
     console.log('Current list:', this.personenListe);
   }
+
+  filteredPersons: Persen[] = [];
+
+  public calculateErbe() {
+    console.log('calc');
+    this.filteredPersons = this.personenListe
+      .filter(p => !p.Enterbung)
+      .filter(p => !p.Erbwuerdig)
+      .filter(p => !p.Pflichtanteilsberechtigt)
+      .filter(p => !p.Vorverstorben);
+    console.log('filtered List:');
+    console.log(this.filteredPersons);
+    console.log('case');
+    //case1
+    if (
+      this.filteredPersons.some(
+        person => person.Art.PersonenArt === 'Ehegatte'
+      ) &&
+      this.filteredPersons.some(person => person.Art.PersonenArt === 'Kinder')
+    ) {
+      console.log('case 1');
+      console.log('Ehegatte');
+      this.filteredPersons.filter(
+        person => person.Art.PersonenArt === 'Ehegatte'
+      )[0].Erbwert = Number(this.vermoegenswert.value) / 3;
+      console.log(
+        'Ehegatte erbe: ' +
+          this.filteredPersons.filter(
+            person => person.Art.PersonenArt === 'Ehegatte'
+          )[0].Erbwert
+      );
+
+      console.log('Erbwert ');
+      this.vermoegenswert.setValue(
+        ((Number(this.vermoegenswert.value) * 2) / 3).toString()
+      );
+
+      console.log('current rest Erbwert: ' + this.vermoegenswert.value);
+
+      //ist gatte erbminderung?
+      if (
+        this.filteredPersons.filter(
+          person => person.Art.PersonenArt === 'Ehegatte'
+        )[0].Pflichtanteilsminderung
+      ) {
+        this.filteredPersons.filter(
+          person => person.Art.PersonenArt === 'Ehegatte'
+        )[0].Erbwert =
+          this.filteredPersons.filter(
+            person => person.Art.PersonenArt === 'Ehegatte'
+          )[0].Erbwert / 2;
+
+        this.vermoegenswert.setValue(
+          (
+            Number(this.vermoegenswert.value) +
+            this.filteredPersons.filter(
+              person => person.Art.PersonenArt === 'Ehegatte'
+            )[0].Erbwert
+          ).toString()
+        );
+      }
+
+      let alreadyUsed = 0;
+
+      this.filteredPersons
+        .filter(person => person.Art.PersonenArt === 'Kinder')
+        .forEach(kind => {
+          kind.Erbwert =
+            Number(this.vermoegenswert.value) /
+            (this.filteredPersons.filter(
+              person => person.Art.PersonenArt === 'Kinder'
+            ).length -
+              alreadyUsed);
+          alreadyUsed++;
+
+          console.log('wert 2 kind: ' + this.vermoegenswert.value);
+          this.vermoegenswert.setValue(
+            (
+              (Number(this.vermoegenswert.value) *
+                (this.filteredPersons.filter(
+                  person => person.Art.PersonenArt === 'Kinder'
+                ).length -
+                  1)) /
+              this.filteredPersons.filter(
+                person => person.Art.PersonenArt === 'Kinder'
+              ).length
+            ).toString()
+          );
+        });
+
+      console.log(this.filteredPersons);
+    }
+  }
 }
 
 // PersonType class definition
@@ -357,6 +452,7 @@ export interface IPersen {
   Enterbung: boolean;
   Pflichtanteilsminderung: boolean;
   Pflichtanteilsberechtigt: boolean;
+  Erbwert: number;
 }
 
 // Class implementation
@@ -367,6 +463,7 @@ export class Persen implements IPersen {
   Enterbung: boolean;
   Pflichtanteilsminderung: boolean;
   Pflichtanteilsberechtigt: boolean;
+  Erbwert: number;
 
   constructor(
     art: PersonType = new PersonType(),
@@ -374,7 +471,8 @@ export class Persen implements IPersen {
     erbwuerdig = false,
     enterbung = false,
     pflichtanteilsminderung = false,
-    pflichtanteilsberechtigt = false
+    pflichtanteilsberechtigt = false,
+    erbwert = 0
   ) {
     this.Art = art;
     this.Vorverstorben = vorverstorben;
@@ -382,5 +480,6 @@ export class Persen implements IPersen {
     this.Enterbung = enterbung;
     this.Pflichtanteilsminderung = pflichtanteilsminderung;
     this.Pflichtanteilsberechtigt = pflichtanteilsberechtigt;
+    this.Erbwert = erbwert;
   }
 }
