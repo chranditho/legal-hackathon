@@ -42,7 +42,7 @@ export class NotarPageComponent {
 
   requestUserLocation(): void {
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      position => {
         this.center = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
