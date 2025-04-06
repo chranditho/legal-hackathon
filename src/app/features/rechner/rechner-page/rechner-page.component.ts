@@ -75,14 +75,14 @@ export class RechnerPageComponent implements OnInit {
 
   vermoegenswert = new FormControl('', [
     Validators.required,
-    Validators.pattern(/^[A-Z0-9]{10}$/) // Adjust pattern to your material number format
+    Validators.pattern(/^[A-Z0-9]{10}$/), // Adjust pattern to your material number format
   ]);
 
   schuldensswert = new FormControl('', [
     Validators.required,
-    Validators.pattern(/^[A-Z0-9]{10}$/) // Adjust pattern to your material number format
+    Validators.pattern(/^[A-Z0-9]{10}$/), // Adjust pattern to your material number format
   ]);
-  
+
   // Set this based on your Angular version
   isAngular15OrHigher = false;
   isLinear = true;
