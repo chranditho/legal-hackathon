@@ -1,7 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Added this line
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { ChangeDetectorRef } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -18,12 +17,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
-import { BrowserModule } from '@angular/platform-browser';
-import { AusschlussgruendeComponent } from './ausschlussgr\u00FCnde';
-import { ErbunwürdigComponent } from './erbunwürdigkeit';
-import { NachkommenComponent } from './nachkommen';
-import { EnterbungComponent } from './enterbung';
-import { PflichtteilsmilderungComponent } from './pflichtteilsminderung';
+import { AusschlussgruendeComponent } from '../ui/ausschlussgründe';
+import { ErbunwuerdigComponent } from '../ui/erbunwürdigkeit';
+import { NachkommenComponent } from '../ui/nachkommen';
+import { EnterbungComponent } from '../ui/enterbung';
+import { PflichtteilsmilderungComponent } from '../ui/pflichtteilsminderung';
 
 export interface Task {
   name: string;
@@ -57,7 +55,7 @@ export interface Task {
     ReactiveFormsModule,
     MatButtonToggleModule, // Added for number selection
     AusschlussgruendeComponent,
-    ErbunwürdigComponent,
+    ErbunwuerdigComponent,
     NachkommenComponent,
     EnterbungComponent,
     PflichtteilsmilderungComponent,
@@ -70,14 +68,38 @@ export interface Task {
   `,
 })
 export class RechnerPageComponent implements OnInit {
-  updatePersonenListe(newList: Persen[]) {
-    this.personenListe = newList;
-    this.cdr.detectChanges();
-  }
-
   public verwandtschaftsverhaeltnisse: FormGroup;
   personenListe: Persen[] = [];
   anzahlOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  // Set this based on your Angular version
+  isAngular15OrHigher = false;
+  isLinear = true;
+  private readonly _formBuilder = inject(FormBuilder);
+  ehepartnerStepGroup = this._formBuilder.group({
+    ehepartnerVerstorben: [null, Validators.required],
+    nachkommenPartner: ['', Validators.required],
+    ehepartnerNachkommen: [null, Validators.required],
+  });
+  erbunwuerdig = this._formBuilder.group({
+    erbunwuerdig1: ['', Validators.required],
+    erbunwuerdig2: ['', Validators.required],
+    erbunwuerdig3: ['', Validators.required],
+    erbunwuerdig4: ['', Validators.required],
+  });
+  enterbung = this._formBuilder.group({
+    enterbtJa: ['', Validators.required],
+    enterbtNein: ['', Validators.required],
+  });
+  pflichtTeilsMinderungKontakt = this._formBuilder.group({
+    kontaktJa: ['', Validators.required],
+    kontaktNein: ['', Validators.required],
+  });
+  pflichtTeilsMinderungABGB = this._formBuilder.group({
+    abgbJa: ['', Validators.required],
+    abgbNein: ['', Validators.required],
+  });
+
+  // A flag to determine which Angular Material version syntax to use
 
   constructor(
     private fb: FormBuilder,
@@ -95,8 +117,32 @@ export class RechnerPageComponent implements OnInit {
     });
   }
 
+  updatePersonenListe(newList: Persen[]) {
+    this.personenListe = newList;
+    this.cdr.detectChanges();
+  }
+
   ngOnInit(): void {
     this.setupFormListeners();
+  }
+
+  public addMultiplePersons(
+    personenArt:
+      | 'Ehegatte'
+      | 'Lebensgefährte'
+      | 'Mutter'
+      | 'Geschwister'
+      | 'Vater'
+      | 'Kinder',
+    anzahl: number
+  ): void {
+    for (let i = 0; i < anzahl; i++) {
+      const personType = new PersonType(personenArt, `${personenArt} ${i + 1}`);
+      const person = new Persen(personType);
+      this.personenListe.push(person);
+    }
+    console.log(`${anzahl} persons of type ${personenArt} added`);
+    console.log('Current list:', this.personenListe);
   }
 
   private initForm(): void {
@@ -206,65 +252,6 @@ export class RechnerPageComponent implements OnInit {
     console.log('Current list:', this.personenListe);
   }
 
-  private removePersonByType(personenArt: string): void {
-    // Remove all persons of the specified type
-    this.personenListe = this.personenListe.filter(
-      p => p.Art.PersonenArt !== personenArt
-    );
-    console.log(`All persons with type ${personenArt} removed`);
-    console.log('Current list:', this.personenListe);
-  }
-
-  public addMultiplePersons(
-    personenArt:
-      | 'Ehegatte'
-      | 'Lebensgefährte'
-      | 'Mutter'
-      | 'Geschwister'
-      | 'Vater'
-      | 'Kinder',
-    anzahl: number
-  ): void {
-    for (let i = 0; i < anzahl; i++) {
-      const personType = new PersonType(personenArt, `${personenArt} ${i + 1}`);
-      const person = new Persen(personType);
-      this.personenListe.push(person);
-    }
-    console.log(`${anzahl} persons of type ${personenArt} added`);
-    console.log('Current list:', this.personenListe);
-  }
-
-  // A flag to determine which Angular Material version syntax to use
-  // Set this based on your Angular version
-  isAngular15OrHigher = false;
-
-  private readonly _formBuilder = inject(FormBuilder);
-
-  ehepartnerStepGroup = this._formBuilder.group({
-    ehepartnerVerstorben: [null, Validators.required],
-    nachkommenPartner: ['', Validators.required],
-    ehepartnerNachkommen: [null, Validators.required],
-  });
-
-  erbunwuerdig = this._formBuilder.group({
-    erbunwuerdig1: ['', Validators.required],
-    erbunwuerdig2: ['', Validators.required],
-    erbunwuerdig3: ['', Validators.required],
-    erbunwuerdig4: ['', Validators.required],
-  });
-  enterbung = this._formBuilder.group({
-    enterbtJa: ['', Validators.required],
-    enterbtNein: ['', Validators.required],
-  });
-  pflichtTeilsMinderungKontakt = this._formBuilder.group({
-    kontaktJa: ['', Validators.required],
-    kontaktNein: ['', Validators.required],
-  });
-  pflichtTeilsMinderungABGB = this._formBuilder.group({
-    abgbJa: ['', Validators.required],
-    abgbNein: ['', Validators.required],
-  });
-
   /*readonly verwandtschaftsverhaeltnisse = this._formBuilder.group({
     ehepartner: false,
     kinder: false,
@@ -274,7 +261,14 @@ export class RechnerPageComponent implements OnInit {
   });
   */
 
-  isLinear = true;
+  private removePersonByType(personenArt: string): void {
+    // Remove all persons of the specified type
+    this.personenListe = this.personenListe.filter(
+      p => p.Art.PersonenArt !== personenArt
+    );
+    console.log(`All persons with type ${personenArt} removed`);
+    console.log('Current list:', this.personenListe);
+  }
 }
 
 // PersonType class definition
@@ -300,7 +294,7 @@ export class PersonType {
       | 'Kinder'
       | 'Enkel'
       | 'Cousin' = 'Ehegatte',
-    name: string = ''
+    name = ''
   ) {
     this.PersonenArt = personenArt;
     this.name = name;
@@ -311,7 +305,7 @@ export class PersonType {
 export interface IPersen {
   Art: PersonType;
   Vorverstorben: boolean;
-  Erbwürdig: boolean;
+  Erbwuerdig: boolean;
   Enterbung: boolean;
   Pflichtanteilsminderung: boolean;
   Pflichtanteilsberechtigt: boolean;
@@ -321,22 +315,22 @@ export interface IPersen {
 export class Persen implements IPersen {
   Art: PersonType;
   Vorverstorben: boolean;
-  Erbwürdig: boolean;
+  Erbwuerdig: boolean;
   Enterbung: boolean;
   Pflichtanteilsminderung: boolean;
   Pflichtanteilsberechtigt: boolean;
 
   constructor(
     art: PersonType = new PersonType(),
-    vorverstorben: boolean = false,
-    erbwürdig: boolean = false,
-    enterbung: boolean = false,
-    pflichtanteilsminderung: boolean = false,
-    pflichtanteilsberechtigt: boolean = false
+    vorverstorben = false,
+    erbwuerdig = false,
+    enterbung = false,
+    pflichtanteilsminderung = false,
+    pflichtanteilsberechtigt = false
   ) {
     this.Art = art;
     this.Vorverstorben = vorverstorben;
-    this.Erbwürdig = erbwürdig;
+    this.Erbwuerdig = erbwuerdig;
     this.Enterbung = enterbung;
     this.Pflichtanteilsminderung = pflichtanteilsminderung;
     this.Pflichtanteilsberechtigt = pflichtanteilsberechtigt;

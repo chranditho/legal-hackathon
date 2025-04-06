@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Persen, PersonType } from './rechner-page.component';
 import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
@@ -7,6 +6,7 @@ import {
   MatButtonToggleChange,
   MatButtonToggleModule,
 } from '@angular/material/button-toggle';
+import { Persen, PersonType } from '../rechner-page/rechner-page.component';
 
 @Component({
   imports: [
@@ -119,7 +119,7 @@ export class NachkommenComponent {
   onToggleChange($event: MatButtonToggleChange, name: String) {
     if (name.toLowerCase().includes('kinder')) {
       // Create a new array instead of modifying the existing one
-      let newList = this.personenListe.filter(
+      const newList = this.personenListe.filter(
         p => !p.Art.name.toLowerCase().includes(name.toLowerCase() + ' enkel')
       );
 

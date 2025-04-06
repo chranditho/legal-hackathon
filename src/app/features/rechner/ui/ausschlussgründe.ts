@@ -1,15 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { Persen } from './rechner-page.component';
 import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+import { Persen } from '../rechner-page/rechner-page.component';
 
 @Component({
   imports: [CommonModule, MatCheckboxModule, FormsModule],
-  selector: 'app-pflichtteilsmilderung',
+  selector: 'app-ausschlussgruende',
   template: `
     <section>
-      <h3>Bitte wählen Sie die Personen mit einer Pflichteilsminderung aus</h3>
+      <h3>Bitte wählen Sie die bereits verstorbenen Personen</h3>
       <div class="persons-container">
         <div class="persons-list">
           <div
@@ -22,9 +22,9 @@ import { FormsModule } from '@angular/forms';
             <div class="person-exclusion-options">
               <p>
                 <mat-checkbox
-                  [(ngModel)]="person.Pflichtanteilsminderung"
+                  [(ngModel)]="person.Vorverstorben"
                   name="verstorben"
-                  >Pflichtteils gemindert</mat-checkbox
+                  >Ist Verstorben</mat-checkbox
                 >
               </p>
             </div>
@@ -89,6 +89,6 @@ import { FormsModule } from '@angular/forms';
     `,
   ],
 })
-export class PflichtteilsmilderungComponent {
+export class AusschlussgruendeComponent {
   @Input() personenListe: Persen[] = [];
 }

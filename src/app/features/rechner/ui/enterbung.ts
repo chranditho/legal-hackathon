@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { Persen } from './rechner-page.component';
 import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+import { Persen } from '../rechner-page/rechner-page.component';
 
 @Component({
   imports: [CommonModule, MatCheckboxModule, FormsModule],
