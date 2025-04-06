@@ -9,14 +9,14 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'check',
+    path: 'kompass',
     loadComponent: () =>
       import('./features/check/check-page/check-page.component').then(
         m => m.CheckPageComponent
       ),
   },
   {
-    path: 'notar',
+    path: 'vermittlung',
     loadComponent: () =>
       import('./features/notar/notar-page/notar-page.component').then(
         m => m.NotarPageComponent
