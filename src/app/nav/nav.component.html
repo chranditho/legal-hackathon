@@ -26,16 +26,26 @@
         </button>
       }
       <a mat-button routerLink="/home" class="font-bold"
-        ><span class="text-blue-500">Fair</span
-        ><span class="text-orange-500">Erben</span></a
+      ><span class="text-blue-500">Fair</span
+      ><span class="text-orange-500">Erben</span></a
       >
       <span class="text-sm"
-        >Alle Angaben beziehen sich ausschließlich auf Österreichisches
+      >Alle Angaben beziehen sich ausschließlich auf Österreichisches
         Recht</span
       >
     </mat-toolbar>
     <main class="bg-white grow">
       <ng-content />
     </main>
+    <footer class=" p-4 text-center text-sm text-gray-600 space-y-4">
+      <p>
+        © 2025 FairErben. Alle Rechte vorbehalten.
+      </p>
+      <p>
+        Alle auf dieser Website bereitgestellten Informationen und Tools dienen ausschließlich allgemeinen
+        Informationszwecken und stellen keine Rechtsberatung dar. Es handelt sich um eine unverbindliche Erstauskunft,
+        die keine individuelle Prüfung oder Beratung durch zur Rechtsberatung befugte Personen ersetzt.
+      </p>
+    </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
