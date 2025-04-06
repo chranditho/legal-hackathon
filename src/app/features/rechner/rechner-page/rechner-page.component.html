@@ -1,36 +1,159 @@
+<style>
+  .anzahl-field {
+    margin-left: 24px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+  }
+
+  .anzahl-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  /* Style for button toggle group */
+  .mat-button-toggle-group {
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .mat-button-toggle {
+    width: 40px;
+  }
+
+  .actions {
+    margin-top: 32px;
+  }
+
+  /* For better responsive behavior */
+  @media (max-width: 768px) {
+    .anzahl-field {
+      margin-left: 20px;
+    }
+  }
+</style>
+
 <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
   <mat-step [stepControl]="verwandtschaftsverhaeltnisse">
     <ng-template matStepLabel>Verwandtschaftsverhältnisse</ng-template>
     <section [formGroup]="verwandtschaftsverhaeltnisse">
+      <h3>
+        Bitte wählen alle verwandschaftsverhältnisse aus Sicht des
+        Verstorbenen/Erbgeber
+      </h3>
+      <br />
       <p>
-        <mat-checkbox formControlName="ehepartner"
-          >Ehegatte*in/Eingetragener Partner
+        <mat-checkbox formControlName="ehepartner">
+          Ehegatte*in/Eingetragener Partner
         </mat-checkbox>
       </p>
       <p>
-        <mat-checkbox formControlName="kinder"
-          >Lebensgefährte*in (ohne Trauschein)
+        <mat-checkbox formControlName="kinder">
+          Lebensgefährte*in (ohne Trauschein)
         </mat-checkbox>
-      </p>
-      <p>
-        <mat-checkbox formControlName="eltern"
-          >Mutter/Vater/Geschwister</mat-checkbox
-        >
-      </p>
-      <p>
-        <mat-checkbox formControlName="nachkommen"
-          >Kinder, Adoptivkinder (Stiefkinder gesetzlich nicht erbberechtigt -
-          muss durch Testament geregelt werden)</mat-checkbox
-        >
       </p>
       <div>
+        <p>
+          <mat-checkbox formControlName="mutter"> Mutter </mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="vater"> Vater </mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="geschwister">
+            Geschwister
+          </mat-checkbox>
+        </p>
+        <div
+          *ngIf="verwandtschaftsverhaeltnisse.get('geschwister')?.value"
+          class="anzahl-field">
+          <span class="anzahl-label">Anzahl:</span>
+          <mat-button-toggle-group formControlName="geschwisterAnzahl">
+            <mat-button-toggle
+              *ngFor="let num of anzahlOptions"
+              [value]="num"
+              >{{ num }}</mat-button-toggle
+            >
+          </mat-button-toggle-group>
+        </div>
+      </div>
+      <div>
+        <mat-checkbox formControlName="nachkommen">
+          Kinder, Adoptivkinder (Stiefkinder gesetzlich nicht erbberechtigt -
+          muss durch Testament geregelt werden)
+        </mat-checkbox>
+        <div
+          *ngIf="verwandtschaftsverhaeltnisse.get('nachkommen')?.value"
+          class="anzahl-field">
+          <span class="anzahl-label">Anzahl:</span>
+          <mat-button-toggle-group formControlName="nachkommenAnzahl">
+            <mat-button-toggle
+              *ngFor="let num of anzahlOptions"
+              [value]="num"
+              >{{ num }}</mat-button-toggle
+            >
+          </mat-button-toggle-group>
+        </div>
+      </div>
+      <div class="actions">
         <button mat-button matStepperPrevious>Zurück</button>
         <button mat-button matStepperNext>Weiter</button>
       </div>
     </section>
   </mat-step>
 
-  @if (verwandtschaftsverhaeltnisse.controls.ehepartner.value) {
+  <mat-step>
+    <ng-template matStepLabel>Nachkommen</ng-template>
+    <app-nachkommen
+      [personenListe]="personenListe"
+      (personenListeChange)="updatePersonenListe($event)">
+    </app-nachkommen>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Vorverstorben</ng-template>
+    <app-ausschlussgruende
+      [personenListe]="personenListe"></app-ausschlussgruende>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Erbunwürdig</ng-template>
+    <app-erbunwuerdig [personenListe]="personenListe"></app-erbunwuerdig>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Enterbung</ng-template>
+    <app-enterbung [personenListe]="personenListe"></app-enterbung>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Pflichteilsminderung</ng-template>
+    <app-pflichtteilsmilderung
+      [personenListe]="personenListe"></app-pflichtteilsmilderung>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
+
+  @if (false) {
     <mat-step [stepControl]="ehepartnerStepGroup">
       <form [formGroup]="ehepartnerStepGroup">
         <ng-template matStepLabel>Auschlussgründe</ng-template>
