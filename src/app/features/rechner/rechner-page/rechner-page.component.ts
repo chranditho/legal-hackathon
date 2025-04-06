@@ -284,31 +284,53 @@ export class RechnerPageComponent implements OnInit {
     console.log('Current list:', this.personenListe);
   }
 
-  public calculateErbe(){
+  public calculateErbe() {
     //case1
-    if (this.personenListe.some(person => person.Art.PersonenArt === 'Ehegatte') && this.personenListe.some(person => person.Art.PersonenArt === 'Kinder') && this.personenListe.filter(person => 
-      person.Art.PersonenArt === 'Ehegatte')[0].Erbwuerdig && !this.personenListe.filter(person => 
-        person.Art.PersonenArt === 'Ehegatte')[0].Enterbung && this.personenListe.filter(person => 
-          person.Art.PersonenArt === 'Ehegatte')[0].Pflichtanteilsberechtigt) {
+    if (
+      this.personenListe.some(
+        person => person.Art.PersonenArt === 'Ehegatte'
+      ) &&
+      this.personenListe.some(person => person.Art.PersonenArt === 'Kinder') &&
+      this.personenListe.filter(
+        person => person.Art.PersonenArt === 'Ehegatte'
+      )[0].Erbwuerdig &&
+      !this.personenListe.filter(
+        person => person.Art.PersonenArt === 'Ehegatte'
+      )[0].Enterbung &&
+      this.personenListe.filter(
+        person => person.Art.PersonenArt === 'Ehegatte'
+      )[0].Pflichtanteilsberechtigt
+    ) {
+      this.personenListe.filter(
+        person => person.Art.PersonenArt === 'Ehegatte'
+      )[0].Erbwert = Number(this.vermoegenswert.value) / 3;
 
-            this.personenListe.filter(person => 
-              person.Art.PersonenArt === 'Ehegatte')[0].Erbwert = Number(this.vermoegenswert.value)/3;
+      this.vermoegenswert.setValue(
+        ((Number(this.vermoegenswert.value) * 2) / 3).toString()
+      );
 
-              this.vermoegenswert.setValue( (Number(this.vermoegenswert.value)*2/3).toString());
+      //ist gatte erbminderung?
+      if (
+        this.personenListe.filter(
+          person => person.Art.PersonenArt === 'Ehegatte'
+        )[0].Pflichtanteilsminderung
+      ) {
+        this.personenListe.filter(
+          person => person.Art.PersonenArt === 'Ehegatte'
+        )[0].Erbwert =
+          this.personenListe.filter(
+            person => person.Art.PersonenArt === 'Ehegatte'
+          )[0].Erbwert / 2;
 
-              //ist gatte erbminderung?
-              if (this.personenListe.filter(person => 
-                person.Art.PersonenArt === 'Ehegatte')[0].Pflichtanteilsminderung) {
-                
-                  this.personenListe.filter(person => 
-                    person.Art.PersonenArt === 'Ehegatte')[0].Erbwert = (this.personenListe.filter(person => 
-                      person.Art.PersonenArt === 'Ehegatte')[0].Erbwert)/2
-
-                      this.vermoegenswert.setValue( (Number(this.vermoegenswert.value) + this.personenListe.filter(person => 
-                        person.Art.PersonenArt === 'Ehegatte')[0].Erbwert).toString());
-
-              }
-      
+        this.vermoegenswert.setValue(
+          (
+            Number(this.vermoegenswert.value) +
+            this.personenListe.filter(
+              person => person.Art.PersonenArt === 'Ehegatte'
+            )[0].Erbwert
+          ).toString()
+        );
+      }
     }
   }
 }
