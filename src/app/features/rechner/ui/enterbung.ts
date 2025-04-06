@@ -22,32 +22,49 @@ import { Persen } from '../rechner-page/rechner-page.component';
             <div class="person-exclusion-options">
               <p>
                 <mat-checkbox [(ngModel)]="person.Enterbung" name="verstorben"
-                  >Hat diese Person gegen den Verstorbenen eine vorsätzliche Straftat begangen, die mit mehr als einem Jahr Freiheitsstrafe bedroht ist? </mat-checkbox>
+                  >Hat diese Person gegen den Verstorbenen eine vorsätzliche
+                  Straftat begangen, die mit mehr als einem Jahr Freiheitsstrafe
+                  bedroht ist?
+                </mat-checkbox>
               </p>
-              <br>
+              <br />
               <p>
                 <mat-checkbox [(ngModel)]="person.Enterbung" name="verstorben"
-                  >Hat diese Person gegen Ehepartner, eingetragene Partner, Lebensgefährten oder Verwandte in gerader Linie, Geschwister des Verstorbenen oder deren nahe Angehörige eine vorsätzliche Straftat begangen, die mit mehr als einem Jahr Freiheitsstrafe bedroht ist?  </mat-checkbox>
+                  >Hat diese Person gegen Ehepartner, eingetragene Partner,
+                  Lebensgefährten oder Verwandte in gerader Linie, Geschwister
+                  des Verstorbenen oder deren nahe Angehörige eine vorsätzliche
+                  Straftat begangen, die mit mehr als einem Jahr Freiheitsstrafe
+                  bedroht ist?
+                </mat-checkbox>
               </p>
-              <br>
+              <br />
               <p>
                 <mat-checkbox [(ngModel)]="person.Enterbung" name="verstorben"
-                  >Hat diese Person absichtlich versucht, den letzten Willen des Verstorbenen zu vereiteln?   </mat-checkbox>
+                  >Hat diese Person absichtlich versucht, den letzten Willen des
+                  Verstorbenen zu vereiteln?
+                </mat-checkbox>
               </p>
-              <br>
+              <br />
               <p>
                 <mat-checkbox [(ngModel)]="person.Enterbung" name="verstorben"
-                  >Hat diese Person dem Verstorbenen in verwerflicher Weise schweres seelisches Leid zugefügt?    </mat-checkbox>
+                  >Hat diese Person dem Verstorbenen in verwerflicher Weise
+                  schweres seelisches Leid zugefügt?
+                </mat-checkbox>
               </p>
-              <br>
+              <br />
               <p>
                 <mat-checkbox [(ngModel)]="person.Enterbung" name="verstorben"
-                  >Hat diese Person Ihre familienrechtlichen Pflichten gegenüber dem Verstorbenen gröblich vernachlässigt?     </mat-checkbox>
+                  >Hat diese Person Ihre familienrechtlichen Pflichten gegenüber
+                  dem Verstorbenen gröblich vernachlässigt?
+                </mat-checkbox>
               </p>
-              <br>
+              <br />
               <p>
                 <mat-checkbox [(ngModel)]="person.Enterbung" name="verstorben"
-                  >Wurde diese Person wegen einer oder mehrerer vorsätzlich begangener Straftaten zu einer lebenslangen oder 20-jährigen Freiheitsstrafe verurteilt? </mat-checkbox>
+                  >Wurde diese Person wegen einer oder mehrerer vorsätzlich
+                  begangener Straftaten zu einer lebenslangen oder 20-jährigen
+                  Freiheitsstrafe verurteilt?
+                </mat-checkbox>
               </p>
             </div>
           </div>
