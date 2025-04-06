@@ -15,7 +15,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="flex! min-h-dvh flex-col justify-between">
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary flex justify-between">
       @if (isHandset$ | async) {
         <button
           type="button"
@@ -25,7 +25,9 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
       }
-      <span>FairErben</span>
+      <span class="font-bold"><span class="text-blue-500">Fair</span><span class="text-orange-500">Erben</span></span>
+      <span class="text-sm">Alle Angaben beziehen sich ausschließlich auf Österreichisches Recht</span>
+
     </mat-toolbar>
     <main class="bg-white grow">
       <ng-content />
