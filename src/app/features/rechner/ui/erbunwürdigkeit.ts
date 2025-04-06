@@ -1,15 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { Persen } from './rechner-page.component';
 import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+import { Persen } from '../rechner-page/rechner-page.component';
 
 @Component({
   imports: [CommonModule, MatCheckboxModule, FormsModule],
-  selector: 'app-ausschlussgruende',
+  selector: 'app-erbunwuerdig',
   template: `
     <section>
-      <h3>Bitte wählen Sie die bereits verstorbenen Personen</h3>
+      <h3>Bitte beantworten Sie die Fragen für jede Person</h3>
       <div class="persons-container">
         <div class="persons-list">
           <div
@@ -22,10 +22,10 @@ import { FormsModule } from '@angular/forms';
             <div class="person-exclusion-options">
               <p>
                 <mat-checkbox
-                  [(ngModel)]="person.Vorverstorben"
-                  name="verstorben"
-                  >Ist Verstorben</mat-checkbox
-                >
+                  [(ngModel)]="person['Erbwuerdig']"
+                  name="erbwuerdig"
+                  >Erbwürdig
+                </mat-checkbox>
               </p>
             </div>
           </div>
@@ -89,6 +89,6 @@ import { FormsModule } from '@angular/forms';
     `,
   ],
 })
-export class AusschlussgruendeComponent {
+export class ErbunwuerdigComponent {
   @Input() personenListe: Persen[] = [];
 }

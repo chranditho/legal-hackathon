@@ -51,12 +51,19 @@ export const routes: Routes = [
       ).then(m => m.DatenschutzerklaerungPageComponent),
   },
   {
+    path: 'home',
+    loadComponent: () =>
+      import('./features/home/home-page/home-page.component').then(
+        m => m.HomePageComponent
+      ),
+  },
+  {
     path: '',
-    redirectTo: 'rechner',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
     path: '**',
-    redirectTo: 'rechner',
+    redirectTo: 'home',
   },
 ];
