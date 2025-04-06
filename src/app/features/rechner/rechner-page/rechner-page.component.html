@@ -1,78 +1,266 @@
+<style>
+  .anzahl-field {
+    margin-left: 24px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+  }
+
+  .anzahl-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  /* Style for button toggle group */
+  .mat-button-toggle-group {
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .mat-button-toggle {
+    width: 40px;
+  }
+
+  .actions {
+    margin-top: 32px;
+  }
+
+  /* For better responsive behavior */
+  @media (max-width: 768px) {
+    .anzahl-field {
+      margin-left: 20px;
+    }
+  }
+</style>
+
 <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
-  <mat-step [stepControl]="verwandschaftsverhaeltnisse">
-    <ng-template matStepLabel>Verwandschaftsverhältnisse</ng-template>
-    <section class="example-section" [formGroup]="verwandschaftsverhaeltnisse">
+  <mat-step [stepControl]="verwandtschaftsverhaeltnisse">
+    <ng-template matStepLabel>Verwandtschaftsverhältnisse</ng-template>
+    <section [formGroup]="verwandtschaftsverhaeltnisse">
+      <h3>
+        Bitte wählen Sie alle Verwandschaftsverhältnisse aus Sicht des
+        Verstorbenen/Erbgeber
+      </h3>
+      <br />
       <p>
-        <mat-checkbox formControlName="ehepartner"
-          >Ehegatte*in/Eingetragener Partner</mat-checkbox
-        >
+        <mat-checkbox formControlName="ehepartner">
+          Ehegatte*in/Eingetragener Partner
+        </mat-checkbox>
       </p>
       <p>
-        <mat-checkbox formControlName="kinder">Lebensgefährte*in</mat-checkbox>
-      </p>
-      <p>
-        <mat-checkbox formControlName="eltern"
-          >Mutter/Vater/Geschwister/Stiefkinder</mat-checkbox
-        >
-      </p>
-      <p>
-        <mat-checkbox formControlName="nachkommen">Nachkommen</mat-checkbox>
-      </p>
-      <p>
-        <mat-checkbox formControlName="adoptivkind">Adoptivkinder</mat-checkbox>
+        <mat-checkbox formControlName="kinder">
+          Lebensgefährte*in (ohne Trauschein)
+        </mat-checkbox>
       </p>
       <div>
+        <p>
+          <mat-checkbox formControlName="mutter"> Mutter </mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="vater"> Vater </mat-checkbox>
+        </p>
+        <p>
+          <mat-checkbox formControlName="geschwister">
+            Geschwister
+          </mat-checkbox>
+        </p>
+        <div
+          *ngIf="verwandtschaftsverhaeltnisse.get('geschwister')?.value"
+          class="anzahl-field">
+          <span class="anzahl-label">Anzahl:</span>
+          <mat-button-toggle-group formControlName="geschwisterAnzahl">
+            <mat-button-toggle
+              *ngFor="let num of anzahlOptions"
+              [value]="num"
+              >{{ num }}</mat-button-toggle
+            >
+          </mat-button-toggle-group>
+        </div>
+      </div>
+      <div>
+        <mat-checkbox formControlName="nachkommen">
+          Kinder, Adoptivkinder (Stiefkinder gesetzlich nicht erbberechtigt -
+          muss durch Testament geregelt werden)
+        </mat-checkbox>
+        <div
+          *ngIf="verwandtschaftsverhaeltnisse.get('nachkommen')?.value"
+          class="anzahl-field">
+          <span class="anzahl-label">Anzahl:</span>
+          <mat-button-toggle-group formControlName="nachkommenAnzahl">
+            <mat-button-toggle
+              *ngFor="let num of anzahlOptions"
+              [value]="num"
+              >{{ num }}</mat-button-toggle
+            >
+          </mat-button-toggle-group>
+        </div>
+      </div>
+      <div class="actions">
         <button mat-button matStepperPrevious>Zurück</button>
         <button mat-button matStepperNext>Weiter</button>
       </div>
     </section>
   </mat-step>
 
-  @if (verwandschaftsverhaeltnisse.controls.ehepartner.value) {
+  <mat-step>
+    <ng-template matStepLabel>Nachkommen</ng-template>
+    <app-nachkommen
+      [personenListe]="personenListe"
+      (personenListeChange)="updatePersonenListe($event)">
+    </app-nachkommen>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Vorverstorben</ng-template>
+    <app-ausschlussgruende
+      [personenListe]="personenListe"></app-ausschlussgruende>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Erbunwürdig</ng-template>
+    <app-erbunwuerdig [personenListe]="personenListe"></app-erbunwuerdig>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Enterbung</ng-template>
+    <app-enterbung [personenListe]="personenListe"></app-enterbung>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Pflichteilsminderung</ng-template>
+    <app-pflichtteilsmilderung
+      [personenListe]="personenListe"></app-pflichtteilsmilderung>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Schenkungen</ng-template>
+    <app-schenkungen [personenListe]="personenListe"></app-schenkungen>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
+
+  @if (false) {
     <mat-step [stepControl]="ehepartnerStepGroup">
       <form [formGroup]="ehepartnerStepGroup">
         <ng-template matStepLabel>Auschlussgründe</ng-template>
         <h4>Ehepartner*in bereits verstorben?</h4>
-        <section class="example-section" [formGroup]="ehepartnerVerstorben">
-          <p>
-            <mat-checkbox formControlName="verstorbenJa">Ja</mat-checkbox>
-          </p>
-          <p>
-            <mat-checkbox formControlName="verstorbenNein">Nein</mat-checkbox>
-          </p>
-        </section>
+        <mat-radio-group formControlName="ehepartnerVerstorben">
+          <mat-radio-button [value]="true">Ja</mat-radio-button>
+          <mat-radio-button [value]="false">Nein</mat-radio-button>
+        </mat-radio-group>
 
-        @if (ehepartnerVerstorben.controls.verstorbenJa.value) {
+        @if (ehepartnerStepGroup.controls.ehepartnerVerstorben.value) {
           <h4>Hat sie Nachkommen?</h4>
-          <section class="example-section" [formGroup]="ehepartnerNachkommen">
-            <p>
-              <mat-checkbox formControlName="nachkommenJa">Ja</mat-checkbox>
-            </p>
-          </section>
-
+          <mat-radio-group formControlName="ehepartnerNachkommen">
+            <mat-radio-button [value]="true">Ja</mat-radio-button>
+            <mat-radio-button [value]="false">Nein</mat-radio-button>
+          </mat-radio-group>
+        }
+        @if (ehepartnerStepGroup.controls.ehepartnerNachkommen.value) {
           <h4>Wie viele?</h4>
           <mat-form-field>
             <mat-label>Anzahl</mat-label>
             <input matInput formControlName="nachkommenPartner" />
           </mat-form-field>
-        } @else {
-          <h4>Erbunwürdig nach §§539, 540, 541 ABGB?</h4>
-          <section class="example-section" [formGroup]="erbunwuerdig">
+        }
+        @if (
+          !ehepartnerStepGroup.controls.ehepartnerVerstorben.value &&
+          ehepartnerStepGroup.touched
+        ) {
+          <h4>Fragen zu § 541 ABGB - Erbunwürdigkeit?</h4>
+          <section [formGroup]="erbunwuerdig">
             <p>
-              <mat-checkbox formControlName="erbunwuerdigJa">Ja</mat-checkbox>
+              <mat-checkbox formControlName="erbunwuerdig1"
+                >Haben Sie gegen den Ehegatten, eingetragenen Partner,
+                Lebensgefährten oder Verwandte in gerader Linie des Verstorbenen
+                eine vorsätzliche Straftat begangen, die mit mehr als einem Jahr
+                Freiheitsstrafe bedroht ist?
+              </mat-checkbox>
             </p>
             <p>
-              <mat-checkbox formControlName="erbunwuerdigNein"
-                >Nein</mat-checkbox
-              >
+              <mat-checkbox formControlName="erbunwuerdig2"
+                >Haben Sie dem Verstorbenen in verwerflicher Weise schweres
+                seelisches Leid zugefügt?
+              </mat-checkbox>
+            </p>
+            <p>
+              <mat-checkbox formControlName="erbunwuerdig3"
+                >Haben Sie Ihre Pflichten aus dem Rechtsverhältnis zwischen
+                Eltern und Kindern gegenüber dem Verstorbenen gröblich
+                vernachlässigt?
+              </mat-checkbox>
+            </p>
+            <p>
+              <mat-checkbox formControlName="erbunwuerdig4"
+                >War der Verstorbene nicht in der Lage, Sie zu enterben, und hat
+                er Ihnen auch nicht zu erkennen gegeben, dass er Ihnen verziehen
+                hat?
+              </mat-checkbox>
             </p>
           </section>
         }
-
-        <div>
-          <button mat-button matStepperPrevious>Zurück</button>
-          <button mat-button matStepperNext>Weiter</button>
-        </div>
+        @if (erbunwuerdig.controls.erbunwuerdig1.value) {
+          <h4>
+            Wurde die Person im Testament ausdrücklich und begründet enterbt?
+          </h4>
+          <section [formGroup]="enterbung">
+            <p>
+              <mat-checkbox formControlName="enterbtJa">Ja</mat-checkbox>
+            </p>
+            <p>
+              <mat-checkbox formControlName="enterbtNein">Nein</mat-checkbox>
+            </p>
+          </section>
+        }
+        @if (enterbung.controls.enterbtNein.value) {
+          <h4>
+            Bestand in den letzten 20 Jahren kein persönlicher Kontakt zum
+            Erblasser ohne dessen Verschulden?
+          </h4>
+          <section [formGroup]="pflichtTeilsMinderungKontakt">
+            <p>
+              <mat-checkbox formControlName="kontaktJa">Ja</mat-checkbox>
+            </p>
+            <p>
+              <mat-checkbox formControlName="kontaktNein">Nein</mat-checkbox>
+            </p>
+          </section>
+          <h4>
+            Wurde im Testament eine ausdrückliche Pflichtteilsminderung gemäß §
+            773a ABGB angeordnet?
+          </h4>
+          <section [formGroup]="pflichtTeilsMinderungABGB">
+            <p>
+              <mat-checkbox formControlName="abgbJa">Ja</mat-checkbox>
+            </p>
+            <p>
+              <mat-checkbox formControlName="abgbNein">Nein</mat-checkbox>
+            </p>
+          </section>
+        }
       </form>
     </mat-step>
   }
