@@ -3,20 +3,21 @@ import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { Persen } from '../rechner-page/rechner-page.component';
+import { ProfilePicComponent } from "./icon";
 
 @Component({
-  imports: [CommonModule, MatCheckboxModule, FormsModule],
+  imports: [CommonModule, MatCheckboxModule, FormsModule, ProfilePicComponent],
   selector: 'app-pflichtteilsmilderung',
   template: `
     <section>
-      <h3>Bitte wählen Sie die Personen mit einer Pflichteilsminderung aus</h3>
+      <h3>Bitte beantworten Sie die Frage für jede Person</h3>
       <div class="persons-container">
         <div class="persons-list">
           <div
             class="person-box"
             *ngFor="let person of personenListe; let i = index">
             <div class="person-name">
-              {{ person.Art.name || person.Art.PersonenArt }}
+            <app-profile-pic [personenArt]="person.Art.PersonenArt"> </app-profile-pic>{{ person.Art.name || person.Art.PersonenArt }}
             </div>
             <div class="person-type">{{ person.Art.PersonenArt }}</div>
             <div class="person-exclusion-options">
@@ -24,7 +25,15 @@ import { Persen } from '../rechner-page/rechner-page.component';
                 <mat-checkbox
                   [(ngModel)]="person.Pflichtanteilsminderung"
                   name="verstorben"
-                  >Pflichtteils gemindert</mat-checkbox
+                  >Hatte diese Person  und der Verstorbene zu keiner Zeit oder über einen längeren Zeitraum vor dem Tod des Verstorbenen kein familiäres Naheverhältnis, wie es zwischen Familienangehörigen üblich ist? </mat-checkbox
+                >
+              </p>
+              <br>
+              <p>
+                <mat-checkbox
+                  [(ngModel)]="person.Pflichtanteilsminderung"
+                  name="verstorben"
+                  >Hat der Verstorbene den Kontakt zu dieser Person ohne berechtigten Grund gemieden oder selbst Anlass für den fehlenden Kontakt gegeben? </mat-checkbox
                 >
               </p>
             </div>

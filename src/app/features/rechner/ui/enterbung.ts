@@ -3,51 +3,69 @@ import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { Persen } from '../rechner-page/rechner-page.component';
+import { ProfilePicComponent } from "./icon";
 
 @Component({
-  imports: [CommonModule, MatCheckboxModule, FormsModule],
+  imports: [CommonModule, MatCheckboxModule, FormsModule, ProfilePicComponent],
   selector: 'app-enterbung',
   template: `
     <section>
-      <h3>Bitte wählen Sie die enterbten Personen aus</h3>
+      <h3>Bitte beantworten sie die Fragen für jede Person</h3>
       <div class="persons-container">
         <div class="persons-list">
           <div
             class="person-box"
             *ngFor="let person of personenListe; let i = index">
             <div class="person-name">
-              {{ person.Art.name || person.Art.PersonenArt }}
+            <app-profile-pic [personenArt]="person.Art.PersonenArt"> </app-profile-pic>{{ person.Art.name || person.Art.PersonenArt }}
             </div>
             <div class="person-type">{{ person.Art.PersonenArt }}</div>
             <div class="person-exclusion-options">
               <p>
                 <mat-checkbox [(ngModel)]="person.Enterbung" name="verstorben"
-                  >Hat diese Person gegen den Verstorbenen eine vorsätzliche Straftat begangen, die mit mehr als einem Jahr Freiheitsstrafe bedroht ist? </mat-checkbox>
+                  >Hat diese Person gegen den Verstorbenen eine vorsätzliche
+                  Straftat begangen, die mit mehr als einem Jahr Freiheitsstrafe
+                  bedroht ist?
+                </mat-checkbox>
               </p>
-              <br>
+              <br />
               <p>
                 <mat-checkbox [(ngModel)]="person.Enterbung" name="verstorben"
-                  >Hat diese Person gegen Ehepartner, eingetragene Partner, Lebensgefährten oder Verwandte in gerader Linie, Geschwister des Verstorbenen oder deren nahe Angehörige eine vorsätzliche Straftat begangen, die mit mehr als einem Jahr Freiheitsstrafe bedroht ist?  </mat-checkbox>
+                  >Hat diese Person gegen Ehepartner, eingetragene Partner,
+                  Lebensgefährten oder Verwandte in gerader Linie, Geschwister
+                  des Verstorbenen oder deren nahe Angehörige eine vorsätzliche
+                  Straftat begangen, die mit mehr als einem Jahr Freiheitsstrafe
+                  bedroht ist?
+                </mat-checkbox>
               </p>
-              <br>
+              <br />
               <p>
                 <mat-checkbox [(ngModel)]="person.Enterbung" name="verstorben"
-                  >Hat diese Person absichtlich versucht, den letzten Willen des Verstorbenen zu vereiteln?   </mat-checkbox>
+                  >Hat diese Person absichtlich versucht, den letzten Willen des
+                  Verstorbenen zu vereiteln?
+                </mat-checkbox>
               </p>
-              <br>
+              <br />
               <p>
                 <mat-checkbox [(ngModel)]="person.Enterbung" name="verstorben"
-                  >Hat diese Person dem Verstorbenen in verwerflicher Weise schweres seelisches Leid zugefügt?    </mat-checkbox>
+                  >Hat diese Person dem Verstorbenen in verwerflicher Weise
+                  schweres seelisches Leid zugefügt?
+                </mat-checkbox>
               </p>
-              <br>
+              <br />
               <p>
                 <mat-checkbox [(ngModel)]="person.Enterbung" name="verstorben"
-                  >Hat diese Person Ihre familienrechtlichen Pflichten gegenüber dem Verstorbenen gröblich vernachlässigt?     </mat-checkbox>
+                  >Hat diese Person Ihre familienrechtlichen Pflichten gegenüber
+                  dem Verstorbenen gröblich vernachlässigt?
+                </mat-checkbox>
               </p>
-              <br>
+              <br />
               <p>
                 <mat-checkbox [(ngModel)]="person.Enterbung" name="verstorben"
-                  >Wurde diese Person wegen einer oder mehrerer vorsätzlich begangener Straftaten zu einer lebenslangen oder 20-jährigen Freiheitsstrafe verurteilt? </mat-checkbox>
+                  >Wurde diese Person wegen einer oder mehrerer vorsätzlich
+                  begangener Straftaten zu einer lebenslangen oder 20-jährigen
+                  Freiheitsstrafe verurteilt?
+                </mat-checkbox>
               </p>
             </div>
           </div>
