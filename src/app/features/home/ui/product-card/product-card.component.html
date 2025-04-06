@@ -1,14 +1,13 @@
 <mat-card appearance="outlined" class="h-full flex flex-col w-80 justify-between">
   <div>
     <mat-card-header>
-      <div mat-card-avatar></div>
       <mat-card-title>{{ card().title }}</mat-card-title>
     </mat-card-header>
     <img
       mat-card-image
       [ngSrc]="card().imageUrl"
       height="250"
-      width="300"
+      width="320"
       [alt]="card().title"
     />
     <mat-card-content>
