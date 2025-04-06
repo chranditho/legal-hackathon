@@ -156,6 +156,15 @@
   <mat-step>
     <ng-template matStepLabel>Schenkungen</ng-template>
     <app-schenkungen [personenListe]="personenListe"></app-schenkungen>
+    <h3>Höhe der Schenkung in Euro [€]</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Wert</mat-label>
+      <input
+        matInput
+        [formControl]="schenkungenWert"
+        placeholder="Schenkung in €" />
+    </mat-form-field>
+
     <div class="actions">
       <button mat-button matStepperPrevious>Zurück</button>
       <button mat-button matStepperNext>Weiter</button>
@@ -178,7 +187,7 @@
 
   <mat-step>
     <ng-template matStepLabel>Schulden</ng-template>
-    <h3>Bitte schätzen Sie die gesammten Schulden des Vertsorbenen/Erbgeber</h3>
+    <h3>Bitte schätzen Sie die gesammten Schulden des Verstorbenen/Erbgeber</h3>
     <mat-form-field appearance="fill">
       <mat-label>Schulden</mat-label>
       <input matInput [formControl]="schuldensswert" placeholder="Schulden" />

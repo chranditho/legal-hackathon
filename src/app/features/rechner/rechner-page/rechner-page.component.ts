@@ -112,6 +112,10 @@ export class RechnerPageComponent implements OnInit {
     abgbJa: ['', Validators.required],
     abgbNein: ['', Validators.required],
   });
+  schenkungenWert = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^[A-Z0-9]{10}$/), // Adjust pattern to your material number format
+  ]);
 
   // A flag to determine which Angular Material version syntax to use
 
