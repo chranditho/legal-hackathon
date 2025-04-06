@@ -76,7 +76,7 @@ export class NotarPageComponent {
     const request: google.maps.places.TextSearchRequest = {
       location: this.center,
       radius: 5000,
-      query: 'Notar Testament',
+      query: 'Notar oder Anwalt für Testament',
     };
 
     service.textSearch(request, (results, status) => {
@@ -90,12 +90,14 @@ export class NotarPageComponent {
       setTimeout(() => {
         this.places = results
           .filter(
-            (p): p is google.maps.places.PlaceResult & {
+            (
+              p
+            ): p is google.maps.places.PlaceResult & {
               geometry: { location: google.maps.LatLng };
               name: string;
             } => !!p.geometry?.location && !!p.name
           )
-          .map((p) => ({
+          .map(p => ({
             name: p.name,
             location: p.geometry.location,
             address: p.formatted_address ?? p.vicinity ?? '',
