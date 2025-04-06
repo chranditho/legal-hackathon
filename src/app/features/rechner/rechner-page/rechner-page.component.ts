@@ -23,6 +23,7 @@ import { ErbunwuerdigComponent } from '../ui/erbunwürdigkeit';
 import { NachkommenComponent } from '../ui/nachkommen';
 import { EnterbungComponent } from '../ui/enterbung';
 import { PflichtteilsmilderungComponent } from '../ui/pflichtteilsminderung';
+import { SchenkungenComponent } from '../ui/schenkungen';
 
 export interface Task {
   name: string;
@@ -60,6 +61,7 @@ export interface Task {
     NachkommenComponent,
     EnterbungComponent,
     PflichtteilsmilderungComponent,
+    SchenkungenComponent,
   ],
   templateUrl: './rechner-page.component.html',
   styles: `
