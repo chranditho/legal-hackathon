@@ -18,8 +18,7 @@ import { ProfilePicComponent } from './icon';
             *ngFor="let person of personenListe; let i = index">
             <div class="person-name">
               <app-profile-pic [personenArt]="person.Art.PersonenArt">
-              </app-profile-pic
-              >{{ person.Art.name || person.Art.PersonenArt }}
+              </app-profile-pic>{{ person.Art.name || person.Art.PersonenArt }}
             </div>
             <div class="person-type">{{ person.Art.PersonenArt }}</div>
             <div class="person-exclusion-options">

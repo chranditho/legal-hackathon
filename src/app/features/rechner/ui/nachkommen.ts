@@ -7,6 +7,7 @@ import {
   MatButtonToggleModule,
 } from '@angular/material/button-toggle';
 import { Persen, PersonType } from '../rechner-page/rechner-page.component';
+import { ProfilePicComponent } from "./icon";
 
 @Component({
   imports: [
@@ -14,7 +15,8 @@ import { Persen, PersonType } from '../rechner-page/rechner-page.component';
     MatCheckboxModule,
     FormsModule,
     MatButtonToggleModule,
-  ],
+    ProfilePicComponent
+],
   selector: 'app-nachkommen',
   template: `
     <section>
@@ -31,7 +33,8 @@ import { Persen, PersonType } from '../rechner-page/rechner-page.component';
                   person.Art.name.toLowerCase().includes('kinder'))
               ">
               <div class="person-name">
-                {{ person.Art.name || person.Art.PersonenArt }}
+              <app-profile-pic [personenArt]="person.Art.PersonenArt">
+              </app-profile-pic>{{ person.Art.name || person.Art.PersonenArt }}
               </div>
               <div class="person-type">{{ person.Art.PersonenArt }}</div>
               <div class="person-exclusion-options">
