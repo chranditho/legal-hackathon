@@ -70,6 +70,40 @@ export interface Task {
     :host {
       display: block;
     }
+
+    .anzahl-field {
+      margin-left: 24px;
+      margin-top: 8px;
+      margin-bottom: 20px;
+    }
+
+    .anzahl-label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    /* Style for button toggle group */
+    .mat-button-toggle-group {
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .mat-button-toggle {
+      width: 40px;
+    }
+
+    .actions {
+      margin-top: 32px;
+    }
+
+    /* For better responsive behavior */
+    @media (max-width: 768px) {
+      .anzahl-field {
+        margin-left: 20px;
+      }
+    }
   `,
 })
 export class RechnerPageComponent implements OnInit {

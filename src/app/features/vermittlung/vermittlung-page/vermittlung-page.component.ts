@@ -16,14 +16,14 @@ interface SafePlaceResult {
 }
 
 @Component({
-  selector: 'app-notar-page',
+  selector: 'app-vermittlung-page',
   standalone: true,
   imports: [CommonModule, GoogleMap, MapMarker, MapInfoWindow],
-  templateUrl: './notar-page.component.html',
-  styleUrls: ['./notar-page.component.css'],
+  templateUrl: './vermittlung-page.component.html',
+  styleUrls: ['./vermittlung-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NotarPageComponent {
+export class VermittlungPageComponent {
   @ViewChild(GoogleMap) map!: GoogleMap;
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
   @ViewChildren(MapMarker) markers!: QueryList<MapMarker>;
@@ -53,7 +53,7 @@ export class NotarPageComponent {
         setTimeout(() => {
           if (this.map?.googleMap) {
             console.log('🟢 Map & location ready → maybeSearch');
-            this.searchNotaries();
+            this.searchVermittlungies();
           } else {
             console.error('❌ map.googleMap not available!');
           }
@@ -63,7 +63,7 @@ export class NotarPageComponent {
     );
   }
 
-  async searchNotaries(): Promise<void> {
+  async searchVermittlungies(): Promise<void> {
     this.isLoading = true;
 
     if (!this.placesLoaded) {
@@ -76,14 +76,14 @@ export class NotarPageComponent {
     const request: google.maps.places.TextSearchRequest = {
       location: this.center,
       radius: 5000,
-      query: 'Notar oder Anwalt für Testament',
+      query: 'Vermittlung oder Anwalt für Testament',
     };
 
     service.textSearch(request, (results, status) => {
       this.isLoading = false;
 
       if (status !== google.maps.places.PlacesServiceStatus.OK || !results) {
-        alert('❌ Keine Notare gefunden.');
+        alert('❌ Keine Vermittlungen gefunden.');
         return;
       }
 

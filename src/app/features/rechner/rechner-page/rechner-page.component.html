@@ -1,40 +1,11 @@
-<style>
-  .anzahl-field {
-    margin-left: 24px;
-    margin-top: 8px;
-    margin-bottom: 20px;
-  }
-
-  .anzahl-label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.6);
-  }
-
-  /* Style for button toggle group */
-  .mat-button-toggle-group {
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .mat-button-toggle {
-    width: 40px;
-  }
-
-  .actions {
-    margin-top: 32px;
-  }
-
-  /* For better responsive behavior */
-  @media (max-width: 768px) {
-    .anzahl-field {
-      margin-left: 20px;
-    }
-  }
-</style>
-
-<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+<div class="p-6 rounded-2xl bg-blue-50 m-4">
+  <h3>So funktioniert's :</h3>
+  <p>Geben Sie das geschätzte Vermögen sowie Informationen zu Verwandtschaftsverhältnissen ein. Unser Tool berechnet
+    automatisch die gesetzlichen Pflichtteile – unter Berücksichtigung aller relevanten Sonderkonstellationen wie
+    Schenkungen, Pflichtteilsminderung oder Enterbungen.
+  </p>
+</div>
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper class="m-4 rounded-2xl">
   <mat-step [stepControl]="verwandtschaftsverhaeltnisse">
     <ng-template matStepLabel>Verwandtschaftsverhältnisse</ng-template>
     <section [formGroup]="verwandtschaftsverhaeltnisse">
@@ -55,10 +26,10 @@
       </p>
       <div>
         <p>
-          <mat-checkbox formControlName="mutter"> Mutter </mat-checkbox>
+          <mat-checkbox formControlName="mutter"> Mutter</mat-checkbox>
         </p>
         <p>
-          <mat-checkbox formControlName="vater"> Vater </mat-checkbox>
+          <mat-checkbox formControlName="vater"> Vater</mat-checkbox>
         </p>
         <p>
           <mat-checkbox formControlName="geschwister">
@@ -73,7 +44,8 @@
             <mat-button-toggle
               *ngFor="let num of anzahlOptions"
               [value]="num"
-              >{{ num }}</mat-button-toggle
+            >{{ num }}
+            </mat-button-toggle
             >
           </mat-button-toggle-group>
         </div>
@@ -91,7 +63,8 @@
             <mat-button-toggle
               *ngFor="let num of anzahlOptions"
               [value]="num"
-              >{{ num }}</mat-button-toggle
+            >{{ num }}
+            </mat-button-toggle
             >
           </mat-button-toggle-group>
         </div>
