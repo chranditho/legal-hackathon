@@ -37,6 +37,20 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'impressum',
+    loadComponent: () =>
+      import(
+        './features/impressum/impressum-page/impressum-page.component'
+      ).then(m => m.ImpressumPageComponent),
+  },
+  {
+    path: 'datenschutzerklaerung',
+    loadComponent: () =>
+      import(
+        './features/datenschutzerklaerung/datenschutzerklaerung-page/datenschutzerklaerung-page.component'
+      ).then(m => m.DatenschutzerklaerungPageComponent),
+  },
+  {
     path: '',
     redirectTo: 'rechner',
     pathMatch: 'full',
