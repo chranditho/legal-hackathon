@@ -51,11 +51,9 @@ export class RechnerPageComponent {
   ehepartnerStepGroup = this._formBuilder.group({
     ehepartnerVerstorben: [null, Validators.required],
     nachkommenPartner: ['', Validators.required],
+    ehepartnerNachkommen: [null, Validators.required],
   });
-  ehepartnerNachkommen = this._formBuilder.group({
-    nachkommenJa: ['', Validators.required],
-    nachkommenNein: ['', Validators.required],
-  });
+
   erbunwuerdig = this._formBuilder.group({
     erbunwuerdig1: ['', Validators.required],
     erbunwuerdig2: ['', Validators.required],

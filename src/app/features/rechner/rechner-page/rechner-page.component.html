@@ -42,16 +42,12 @@
 
         @if (ehepartnerStepGroup.controls.ehepartnerVerstorben.value) {
           <h4>Hat sie Nachkommen?</h4>
-          <section [formGroup]="ehepartnerNachkommen">
-            <p>
-              <mat-checkbox formControlName="nachkommenJa">Ja</mat-checkbox>
-            </p>
-            <p>
-              <mat-checkbox formControlName="nachkommenNein">Nein</mat-checkbox>
-            </p>
-          </section>
+          <mat-radio-group formControlName="ehepartnerNachkommen">
+            <mat-radio-button [value]="true">Ja</mat-radio-button>
+            <mat-radio-button [value]="false">Nein</mat-radio-button>
+          </mat-radio-group>
         }
-        @if (ehepartnerNachkommen.controls.nachkommenJa.value) {
+        @if (ehepartnerStepGroup.controls.ehepartnerNachkommen.value) {
           <h4>Wie viele?</h4>
           <mat-form-field>
             <mat-label>Anzahl</mat-label>
