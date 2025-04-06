@@ -153,6 +153,15 @@
     </div>
   </mat-step>
 
+  <mat-step>
+    <ng-template matStepLabel>Schenkungen</ng-template>
+    <app-schenkungen [personenListe]="personenListe"></app-schenkungen>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
+
   @if (false) {
     <mat-step [stepControl]="ehepartnerStepGroup">
       <form [formGroup]="ehepartnerStepGroup">
