@@ -1,17 +1,25 @@
-<!-- Download link -->
-
-<p>
+<!-- /src/app/components/download-section.component.html -->
+<div class="card-container">
   <a
-    href="assets/Legal%20Tech%20Hackathon%20-%20FAIRerben.pdf"
+    mat-raised-button
+    color="warn"
+    class="download-button"
+    href="assets/LHT_mustertestament.pdf"
     target="_blank"
-    type="application/pdf">
-    📄 Muster-Testament (PDF)
+  >
+    <mat-icon class="button-icon">picture_as_pdf</mat-icon>
+    Muster-Testament (PDF)
   </a>
-</p>
-<p>
+<br>
+<br>
   <a
+    mat-raised-button
+    color="primary"
+    class="download-button"
     href="assets/Legal%20Tech%20Hackathon%20-%20FAIRerben.odt"
-    download="Muster-Testament.odt">
-    📄 Muster-Testament (DOC)
+    download="Muster-Testament.odt"
+  >
+    <mat-icon class="button-icon">description</mat-icon>
+    Muster-Testament (DOC)
   </a>
-</p>
+</div>
