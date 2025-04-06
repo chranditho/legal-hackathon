@@ -30,28 +30,28 @@ export class ProfilePicComponent implements OnInit {
       this.imageUrl = 'father.png';
     }
 
-    if ((this.personenArt == 'Mutter')) {
+    if (this.personenArt == 'Mutter') {
       this.imageUrl = 'mother.png';
     }
 
-    if ((this.personenArt == 'Kinder')) {
+    if (this.personenArt == 'Kinder') {
       this.imageUrl = 'children.png';
     }
 
-    if ((this.personenArt == 'Kinder')) {
+    if (this.personenArt == 'Kinder') {
       this.imageUrl = 'children.png';
     }
 
-    if (this.personenArt == "Geschwister") {
-      this.imageUrl = "people.png"
+    if (this.personenArt == 'Geschwister') {
+      this.imageUrl = 'people.png';
     }
 
-    if (this.personenArt == "Enkel") {
-      this.imageUrl = "family.png"
+    if (this.personenArt == 'Enkel') {
+      this.imageUrl = 'family.png';
     }
 
-    if (this.personenArt == "Cousin") {
-      this.imageUrl = "family.png"
+    if (this.personenArt == 'Cousin') {
+      this.imageUrl = 'family.png';
     }
   }
   imageUrl: string = 'diamond-ring.png';
